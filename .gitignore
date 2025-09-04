@@ -42,3 +42,10 @@ next-env.d.ts
 backup.ts
 roadmap.md
 keep.txt
+/cache
+/dist
+/bundle
+/cache
+/types
+/coverage
+/artifacts
