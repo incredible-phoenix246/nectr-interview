@@ -1,10 +1,9 @@
 import "@nomicfoundation/hardhat-verify";
 import "@nomicfoundation/hardhat-toolbox-viem";
-import { configVariable } from "hardhat/config";
-import type { HardhatUserConfig } from "hardhat/config";
+import { type HardhatUserConfig } from "hardhat/config";
 
-const PRIVATE_KEY = configVariable("PRIVATE_KEY");
-const POLYGONSCAN_API_KEY = configVariable("POLYGONSCAN_API_KEY");
+const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
+const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -19,6 +18,20 @@ const config: HardhatUserConfig = {
         },
       },
     ],
+    profiles: {
+      default: {
+        version: "0.8.28",
+      },
+      production: {
+        version: "0.8.28",
+        settings: {
+          optimizer: {
+            enabled: true,
+            runs: 200,
+          },
+        },
+      },
+    },
   },
   networks: {
     mumbai: {
@@ -31,11 +44,6 @@ const config: HardhatUserConfig = {
       url: "https://polygon-rpc.com",
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
       chainId: 137,
-      type: "http",
-    },
-    localhost: {
-      url: "http://127.0.0.1:8545",
-      chainId: 31337,
       type: "http",
     },
   },
