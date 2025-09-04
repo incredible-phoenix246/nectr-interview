@@ -1,11 +1,11 @@
-import { QueryKey } from "@tanstack/react-query";
+import { QueryKey } from '@tanstack/react-query'
 
-declare module "@tanstack/react-query" {
-    interface Register {
-        mutationMeta: {
-            invalidatesQuery?: QueryKey;
-            successMessage?: string;
-            errorMessage?: string;
-        };
+declare module '@tanstack/react-query' {
+  interface Register {
+    mutationMeta: {
+      invalidatesQuery?: QueryKey
+      successMessage?: string
+      errorMessage?: string
     }
+  }
 }
