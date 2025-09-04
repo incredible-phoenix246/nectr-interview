@@ -54,3 +54,4 @@ tailwind.config.ts
 tsconfig.json
 pnpm-lock.yaml  
 generated
+/smart-contract
