@@ -1,5 +1,5 @@
 import type { NextConfig } from 'next'
-import { inDevEnvironment } from './src/lib/utils.js'
+import { inDevEnvironment } from '~/lib/utils'
 
 const nextConfig: NextConfig = {
   typedRoutes: true,
