@@ -39,8 +39,8 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
      * @dev Constructor that mints initial supply to deployer
      */
     constructor() ERC20("NECTR Token", "NECTR") Ownable(msg.sender) {
-        // Mint 10 thousand tokens to deployer
-        _mint(msg.sender, 100_000 * 10 ** decimals());
+        // Mint 1 million tokens to deployer
+        _mint(msg.sender, 1_000_000 * 10 ** decimals());
     }
 
     /**
