@@ -9,15 +9,15 @@ export function ContractStats() {
 
   if (isLoading) {
     return (
-      <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
+      <div className="border border-white/20 bg-white/10 p-6 backdrop-blur-md">
         <h2 className="mb-6 flex items-center gap-2 text-2xl font-semibold text-white">
           <BarChart3 className="h-6 w-6" />
           Contract Statistics
         </h2>
         <div className="animate-pulse space-y-4">
-          <div className="h-20 rounded-lg bg-white/5" data-testid="skeleton" />
-          <div className="h-20 rounded-lg bg-white/5" data-testid="skeleton" />
-          <div className="h-20 rounded-lg bg-white/5" data-testid="skeleton" />
+          <div className="h-20 bg-white/5" data-testid="skeleton" />
+          <div className="h-20 bg-white/5" data-testid="skeleton" />
+          <div className="h-20 bg-white/5" data-testid="skeleton" />
         </div>
       </div>
     )
@@ -32,7 +32,7 @@ export function ContractStats() {
       : 0
 
   return (
-    <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
+    <div className="bg-card border border-dashed p-6 backdrop-blur-md">
       <h2 className="mb-6 flex items-center gap-2 text-2xl font-semibold text-white">
         <BarChart3 className="h-6 w-6" />
         Contract Statistics
@@ -40,7 +40,7 @@ export function ContractStats() {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* Total Supply */}
-        <div className="rounded-lg border border-blue-500/30 bg-gradient-to-br from-blue-600/20 to-blue-800/20 p-4">
+        <div className="border border-blue-500/30 bg-gradient-to-br from-blue-600/20 to-blue-800/20 p-4">
           <div className="mb-2 flex items-center gap-2">
             <Users className="h-5 w-5 text-blue-400" />
             <h3 className="text-sm font-medium text-blue-200">Total Supply</h3>
@@ -52,7 +52,7 @@ export function ContractStats() {
         </div>
 
         {/* Total Staked */}
-        <div className="rounded-lg border border-green-500/30 bg-gradient-to-br from-green-600/20 to-green-800/20 p-4">
+        <div className="border border-green-500/30 bg-gradient-to-br from-green-600/20 to-green-800/20 p-4">
           <div className="mb-2 flex items-center gap-2">
             <Shield className="h-5 w-5 text-green-400" />
             <h3 className="text-sm font-medium text-green-200">Total Staked</h3>
@@ -66,7 +66,7 @@ export function ContractStats() {
         </div>
 
         {/* Staking APY */}
-        <div className="rounded-lg border border-purple-500/30 bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-4">
+        <div className="border border-purple-500/30 bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-4">
           <div className="mb-2 flex items-center gap-2">
             <Percent className="h-5 w-5 text-purple-400" />
             <h3 className="text-sm font-medium text-purple-200">Staking APY</h3>
@@ -80,7 +80,7 @@ export function ContractStats() {
         </div>
 
         {/* Minimum Stake */}
-        <div className="rounded-lg border border-orange-500/30 bg-gradient-to-br from-orange-600/20 to-orange-800/20 p-4">
+        <div className="border border-orange-500/30 bg-gradient-to-br from-orange-600/20 to-orange-800/20 p-4">
           <div className="mb-2 flex items-center gap-2">
             <Shield className="h-5 w-5 text-orange-400" />
             <h3 className="text-sm font-medium text-orange-200">

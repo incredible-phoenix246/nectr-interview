@@ -8,6 +8,7 @@ import { Button } from '~/components/ui/button'
 import { ConnectWallet } from './connect-wallet'
 import { useDisconnect } from '@reown/appkit/react'
 import { ChevronLeft, ChevronRight, LockOpen, Loader2 } from 'lucide-react'
+import { ThemeSwitch } from '../theme-switch'
 
 export const Menu = () => {
   const { isConnected } = useAccount()
@@ -41,18 +42,21 @@ export const Menu = () => {
           {isCollapsed ? <ChevronRight /> : <ChevronLeft />}
         </Button>
         {!isCollapsed && (
-          <Button
-            size="icon"
-            onClick={handleSignOut}
-            disabled={isSigningOut}
-            className="flex size-10 items-center justify-center transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50"
-          >
-            {isSigningOut ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <LockOpen />
-            )}
-          </Button>
+          <>
+            <ThemeSwitch />
+            <Button
+              size="icon"
+              onClick={handleSignOut}
+              disabled={isSigningOut}
+              className="flex size-10 items-center justify-center transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {isSigningOut ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <LockOpen />
+              )}
+            </Button>
+          </>
         )}
       </div>
       <Notifications

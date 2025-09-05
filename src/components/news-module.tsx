@@ -115,7 +115,6 @@ export function NewsModule() {
     }
   }
 
-
   const handleArticleClick = (url: string) => {
     if (!url || url === '#') {
       toast.error('This article page is not available yet 🚫')
@@ -125,7 +124,7 @@ export function NewsModule() {
   }
 
   return (
-    <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
+    <div className="bg-card border border-dashed p-6 backdrop-blur-md max-md:p-2">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-2xl font-semibold text-white">
           <Newspaper className="h-6 w-6" />
@@ -140,7 +139,7 @@ export function NewsModule() {
           <button
             key={category}
             onClick={() => setFilter(category)}
-            className={`flex items-center gap-1 rounded-full px-3 py-1 text-sm transition-colors ${
+            className={`flex items-center gap-1 px-3 py-1 text-sm transition-colors ${
               filter === category
                 ? 'bg-purple-600 text-white'
                 : 'bg-white/10 text-gray-300 hover:bg-white/20'
@@ -158,12 +157,12 @@ export function NewsModule() {
           <article
             key={article.id}
             onClick={() => handleArticleClick(article.url)}
-            className={`bg-gradient-to-r ${getCategoryColor(article.category)} group cursor-pointer rounded-lg border p-4 transition-all duration-200`}
+            className={`bg-gradient-to-r ${getCategoryColor(article.category)} group cursor-pointer border p-4 transition-all duration-200`}
           >
             <div className="flex gap-4">
               {article.imageUrl && (
                 <div className="flex-shrink-0">
-                  <div className="flex h-16 w-16 items-center justify-center rounded-lg bg-gray-600">
+                  <div className="flex h-16 w-16 items-center justify-center bg-gray-600">
                     <Newspaper className="h-8 w-8 text-gray-400" />
                   </div>
                 </div>

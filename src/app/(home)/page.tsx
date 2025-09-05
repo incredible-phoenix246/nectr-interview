@@ -8,6 +8,7 @@ import { NewsModule } from '~/components/news-module'
 import { SocialFeed } from '~/components/social-feed'
 import { Button } from '~/components/ui/button'
 import { useAppKit, useAppKitState } from '@reown/appkit/react'
+// import { ThemeSwitch } from '~/components/global/theme-switch'
 
 export default function Dashboard() {
   const { isConnected } = useAccount()
@@ -15,7 +16,10 @@ export default function Dashboard() {
   const { loading } = useAppKitState()
 
   return (
-    <div className="container mx-auto min-h-screen p-8">
+    <div className="container mx-auto min-h-screen p-8 max-md:p-2">
+      {/* <div className="absolute top-5 right-5 z-[99]">
+        <ThemeSwitch />
+      </div> */}
       <div className="space-y-6">
         <h1 className="mb-8 text-center text-4xl font-bold text-white">
           NECTR dApp

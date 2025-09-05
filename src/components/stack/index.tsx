@@ -103,25 +103,23 @@ export function StakingInterface() {
     unstakeAmountNum > availableStaked ? 'Insufficient staked balance' : null
 
   return (
-    <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
-      <h2 className="mb-6 flex items-center gap-2 text-2xl font-semibold text-white">
+    <div className="bg-card border border-dashed p-6 backdrop-blur-md">
+      <h2 className="mb-6 flex items-center gap-2 text-2xl font-semibold">
         <Coins className="h-6 w-6" />
         Staking Interface
       </h2>
 
       {/* Staking Section */}
       <div className="mb-8">
-        <h3 className="mb-4 flex items-center gap-2 text-lg font-medium text-white">
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-medium">
           <TrendingUp className="h-5 w-5 text-green-400" />
           Stake NECTR Tokens
         </h3>
 
-        <div className="mb-4 rounded-lg bg-black/20 p-4">
+        <div className="bg-background mb-4 p-4">
           <div className="mb-2 flex items-center justify-between">
-            <label className="text-sm font-medium text-gray-300">
-              Amount to Stake
-            </label>
-            <span className="text-sm text-gray-400">
+            <label className="text-sm font-medium">Amount to Stake</label>
+            <span className="text-sm">
               Available: {formatTokenAmount(balance as bigint | undefined)}{' '}
               NECTR
             </span>
@@ -134,7 +132,7 @@ export function StakingInterface() {
                 value={stakeAmount}
                 onChange={(e) => setStakeAmount(e.target.value)}
                 placeholder="0.00"
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                className="w-full border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:ring-2 focus:ring-purple-500 focus:outline-none"
                 step="0.01"
                 min="0"
               />
@@ -149,7 +147,7 @@ export function StakingInterface() {
             <button
               onClick={handleStake}
               disabled={isStakeDisabled || !!stakeError}
-              className="rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-purple-700 hover:to-blue-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
+              className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-purple-700 hover:to-blue-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
             >
               {isPending || isConfirming ? 'Staking...' : 'Stake'}
             </button>
@@ -172,7 +170,7 @@ export function StakingInterface() {
       <div className="mb-8">
         <h3 className="mb-4 text-lg font-medium text-white">Unstake Tokens</h3>
 
-        <div className="mb-4 rounded-lg bg-black/20 p-4">
+        <div className="bg-background mb-4 p-4">
           <div className="mb-2 flex items-center justify-between">
             <label className="text-sm font-medium text-gray-300">
               Amount to Unstake
@@ -190,7 +188,7 @@ export function StakingInterface() {
                 value={unstakeAmount}
                 onChange={(e) => setUnstakeAmount(e.target.value)}
                 placeholder="0.00"
-                className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:ring-2 focus:ring-purple-500 focus:outline-none"
+                className="w-full border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-gray-400 focus:border-transparent focus:ring-2 focus:ring-purple-500 focus:outline-none"
                 step="0.01"
                 min="0"
               />
@@ -205,7 +203,7 @@ export function StakingInterface() {
             <button
               onClick={handleUnstake}
               disabled={isUnstakeDisabled || !!unstakeError}
-              className="rounded-lg bg-gradient-to-r from-red-600 to-pink-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-red-700 hover:to-pink-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
+              className="bg-gradient-to-r from-red-600 to-pink-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-red-700 hover:to-pink-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
             >
               {isPending || isConfirming ? 'Unstaking...' : 'Unstake'}
             </button>
@@ -221,7 +219,7 @@ export function StakingInterface() {
       </div>
 
       {/* Rewards Section */}
-      <div className="rounded-lg border border-yellow-500/30 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 p-4">
+      <div className="border border-yellow-500/30 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 p-4">
         <h3 className="mb-3 flex items-center gap-2 text-lg font-medium text-white">
           <Gift className="h-5 w-5 text-yellow-400" />
           Pending Rewards
@@ -240,7 +238,7 @@ export function StakingInterface() {
           <button
             onClick={handleClaimRewards}
             disabled={isClaimDisabled}
-            className="rounded-lg bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-yellow-700 hover:to-orange-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
+            className="bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-yellow-700 hover:to-orange-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
           >
             {isPending || isConfirming ? 'Claiming...' : 'Claim Rewards'}
           </button>
@@ -249,7 +247,7 @@ export function StakingInterface() {
 
       {/* Transaction Status */}
       {(isPending || isConfirming || isConfirmed || error) && (
-        <div className="mt-4 rounded-lg border border-white/20 bg-white/5 p-4">
+        <div className="mt-4 border border-white/20 bg-white/5 p-4">
           {isPending && (
             <div className="flex items-center gap-2 text-yellow-400">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-yellow-400 border-t-transparent"></div>
