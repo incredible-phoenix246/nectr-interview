@@ -1,5 +1,6 @@
 'use client'
 
+
 import { config } from '~/utils/web3/wagmi'
 import { ThemeProvider } from 'next-themes'
 import { getQueryClient } from '~/lib/get-query-client'
@@ -18,7 +19,11 @@ export function Providers({
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      <WagmiProvider config={config} initialState={initialState}>
+      <WagmiProvider
+        config={config}
+        initialState={initialState}
+        reconnectOnMount
+      >
         <QueryClientProvider client={queryClient}>
           {children}
         </QueryClientProvider>

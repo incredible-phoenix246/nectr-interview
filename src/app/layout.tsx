@@ -2,17 +2,12 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { Providers } from './provider'
-import { SessionProvider } from 'next-auth/react'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Outfit } from 'next/font/google'
 import { auth } from './(auth)/auth'
+import { cn } from '~/lib/utils'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const outfit = Outfit({
+  variable: '--font-outfit',
   subsets: ['latin'],
 })
 
@@ -28,15 +23,10 @@ export default async function RootLayout({
 }>) {
   const headersData = await headers()
   const cookies = headersData.get('cookie')
-  const session = await auth()
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <SessionProvider session={session}>
-          <Providers cookies={cookies}>{children}</Providers>
-        </SessionProvider>
+      <body className={cn('antialiased', outfit.variable)}>
+        <Providers cookies={cookies}>{children}</Providers>
       </body>
     </html>
   )

@@ -1,8 +1,15 @@
+import { inDevEnvironment } from '~/lib/utils'
 import { createAppKit } from '@reown/appkit/react'
 import { WagmiAdapter } from '@reown/appkit-adapter-wagmi'
 import type { AppKitNetwork } from '@reown/appkit/networks'
 import { polygon, polygonAmoy } from '@reown/appkit/networks'
 
+export const metadata = {
+  name: 'NECTR dApp',
+  description: 'Decentralized staking ecosystem for NECTR tokens',
+  url: inDevEnvironment ? "http://localhost:3000" : process.env.APP_URL as string,
+  icons: ['https://nectr-dapp.vercel.app/favicon.ico'],
+}
 export const amoy = {
   id: 80002,
   name: 'Polygon Amoy Testnet',
@@ -33,27 +40,13 @@ export const networks = [amoy, polygonAmoy, polygon] as [
   ...AppKitNetwork[],
 ]
 
-export const modal = createAppKit({
+createAppKit({
   adapters: [wagmiAdapter],
   projectId,
+  // siweConfig,
   networks,
   defaultNetwork: amoy,
-  metadata: {
-    name: 'NECTR dApp',
-    description: 'Decentralized staking ecosystem for NECTR tokens',
-    url: 'https://nectr-dapp.vercel.app',
-    icons: ['https://nectr-dapp.vercel.app/favicon.ico'],
-  },
-  features: {
-    analytics: true,
-    email: false,
-  },
-  // themeMode: 'dark',
-  // themeVariables: {
-  //     '--w3m-color-mix': '#8B5CF6',
-  //     '--w3m-color-mix-strength': 20,
-  //     '--w3m-border-radius-master': '12px',
-  // },
+  metadata,
 })
 
 export const config = wagmiAdapter.wagmiConfig

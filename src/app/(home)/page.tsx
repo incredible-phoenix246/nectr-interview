@@ -1,51 +1,35 @@
 'use client'
 
 import { useAccount } from 'wagmi'
-import { useAppKit, useAppKitState } from '@reown/appkit/react'
-import { Button } from '~/components/ui/button'
+import { StakingInterface } from '~/components/stack'
+import { ContractStats } from '~/components/contract'
+import { WalletInfo } from '~/components/wallet/wallet-info'
 
 export default function Dashboard() {
   const { isConnected } = useAccount()
-  const { open } = useAppKit()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-5xl font-bold text-white">
-            NECTR Ecosystem
-          </h1>
-          <p className="mb-8 text-xl text-gray-300">
-            Stake, earn, and connect with the community
-          </p>
-
-          <div className="z-[50000000] flex justify-center">
-            {/* <w3m-button /> */}
-            <Button
-              className="absolute bottom-10 left-1/2 -translate-x-1/2"
-              onClick={() => open()}
-            >
-              Connect Wallet
-              {/* {loading ? 'Connecting...' : 'Connect Wallet'} */}
-            </Button>
-          </div>
-        </div>
-
+    <div className="container mx-auto min-h-screen p-8">
+      <div className="">
+        <h1 className="mb-8 text-center text-4xl font-bold text-white">
+          NECTR dApp
+        </h1>
         {isConnected ? (
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {/* Left Column */}
             <div className="space-y-6">
-              {/* <WalletInfo />
-              <ContractStats /> */}
+              <WalletInfo />
+              <ContractStats />
             </div>
 
             {/* Right Column */}
-            <div>{/* <StakingInterface /> */}</div>
+            <div>
+              <StakingInterface />
+            </div>
           </div>
         ) : (
-          <div className="text-center text-gray-300">
-            <p className="text-lg">Connect your wallet to start using NECTR</p>
+          <div className="rounded-xl border border-white/20 bg-white/10 p-6 text-center text-white backdrop-blur-md">
+            <p>Connect your wallet to continue</p>
           </div>
         )}
       </div>
