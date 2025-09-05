@@ -1,9 +1,12 @@
 'use client'
 
 import { useAccount } from 'wagmi'
+import { useAppKit, useAppKitState } from '@reown/appkit/react'
+import { Button } from '~/components/ui/button'
 
 export default function Dashboard() {
   const { isConnected } = useAccount()
+  const { open } = useAppKit()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
@@ -18,7 +21,14 @@ export default function Dashboard() {
           </p>
 
           <div className="z-[50000000] flex justify-center">
-            <w3m-button />
+            {/* <w3m-button /> */}
+            <Button
+              className="absolute bottom-10 left-1/2 -translate-x-1/2"
+              onClick={() => open()}
+            >
+              Connect Wallet
+              {/* {loading ? 'Connecting...' : 'Connect Wallet'} */}
+            </Button>
           </div>
         </div>
 
