@@ -3,7 +3,6 @@ import type { Metadata } from 'next'
 import { headers } from 'next/headers'
 import { Providers } from './provider'
 import { Outfit } from 'next/font/google'
-import { auth } from './(auth)/auth'
 import { cn } from '~/lib/utils'
 
 const outfit = Outfit({
