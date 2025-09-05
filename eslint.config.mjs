@@ -10,7 +10,7 @@ const compat = new FlatCompat({
 })
 
 const eslintConfig = [
-  { ignores: ['smart-contract/'] },
+  { ignores: ['smart-contract/', 'next-env.d.ts'] },
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
 ]
 

@@ -1,12 +1,10 @@
 import { cn } from '~/lib/utils'
+import { useAccount } from 'wagmi'
 import { Settings2 } from 'lucide-react'
-import { Button } from '~/components/ui/button'
-import { useAccount, useDisconnect } from 'wagmi'
-import { useAppKit } from '@reown/appkit/react'
 import { thumbs } from '@dicebear/collection'
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
-import { useNECTRContract } from '~/hooks/use-nectr-contract'
+import { Button } from '~/components/ui/button'
 import { createAvatar } from '@dicebear/core'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 
 export const UserBadge = ({
   isCollapsed,
@@ -15,13 +13,7 @@ export const UserBadge = ({
   isCollapsed: boolean
   setIsCollapsed: (isCollapsed: boolean) => void
 }) => {
-  const { address, isConnected } = useAccount()
-  const { useBalance, useStakedBalance, usePendingRewards } = useNECTRContract()
-  const { data: balance, isLoading: balanceLoading } = useBalance(address)
-  const { data: stakedBalance, isLoading: stakedLoading } =
-    useStakedBalance(address)
-  const { data: pendingRewards, isLoading: rewardsLoading } =
-    usePendingRewards(address)
+  const { address } = useAccount()
 
   const avatar = createAvatar(thumbs, {
     scale: 50,

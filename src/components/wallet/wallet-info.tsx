@@ -10,6 +10,7 @@ import {
   formatStakingInfo,
   useNECTRContract,
 } from '~/hooks/use-nectr-contract'
+import { Button } from '../ui/button'
 
 export function WalletInfo() {
   const { address, isConnected } = useAccount()
@@ -48,24 +49,21 @@ export function WalletInfo() {
     }
   }
 
-  // Format staking info for display
   const formattedStakingInfo = formatStakingInfo(
     stakingInfo as readonly [bigint, bigint, bigint] | undefined
   )
 
   if (!isConnected) {
     return (
-      <div className="rounded-xl border border-white/20 bg-white/10 p-6 text-center backdrop-blur-md">
-        <Wallet className="mx-auto mb-4 h-12 w-12 text-purple-400" />
+      <div className="rounded-xl border p-6 text-center backdrop-blur-md">
+        <Wallet className="mx-auto mb-4 h-12 w-12" />
         <h2 className="mb-4 text-2xl font-semibold text-white">
           Connect Your Wallet
         </h2>
-        <p className="mb-6 text-gray-300">
-          Connect your wallet to view your NECTR portfolio
-        </p>
+        <p className="mb-6">Connect your wallet to view your NECTR portfolio</p>
         <button
           onClick={() => open()}
-          className="rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-purple-700 hover:to-blue-700"
+          className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-purple-700 hover:to-blue-700"
         >
           Connect Wallet
         </button>
@@ -74,42 +72,41 @@ export function WalletInfo() {
   }
 
   return (
-    <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
+    <div className="bg-card border border-dashed p-6 backdrop-blur-md">
       <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-2xl font-semibold text-white">
-          Wallet Information
-        </h2>
-        <button
+        <h2 className="text-2xl font-semibold">Wallet Information</h2>
+        <Button
           onClick={() => disconnect()}
-          className="rounded-md p-2 text-gray-300 transition-colors hover:bg-white/10 hover:text-white"
+          className="p-2 transition-colors"
           title="Disconnect wallet"
+          variant="outline"
         >
           <LogOut className="h-4 w-4" />
-        </button>
+        </Button>
       </div>
 
       <div className="mb-6">
-        <label className="mb-2 block text-sm font-medium text-gray-300">
-          Wallet Address
-        </label>
-        <div className="flex items-center gap-2 rounded-lg bg-black/20 p-3">
+        <label className="mb-2 block text-sm font-medium">Wallet Address</label>
+        <div className="bg-background flex items-center gap-2 rounded p-3">
           <span className="flex-1 truncate font-mono text-sm text-white">
             {typeof address === 'string' ? address : ''}
           </span>
-          <button
+          <Button
             onClick={copyAddress}
-            className="rounded-md p-2 transition-colors hover:bg-white/10"
+            className="p-1 transition-colors"
             title="Copy address"
+            variant="outline"
           >
-            <Copy className="h-4 w-4 text-gray-300" />
-          </button>
-          <button
+            <Copy className="h-4 w-4" />
+          </Button>
+          <Button
             onClick={openInExplorer}
-            className="rounded-md p-2 transition-colors hover:bg-white/10"
+            className="p-1 transition-colors hover:bg-white/10"
             title="View on PolygonScan"
+            variant="outline"
           >
-            <ExternalLink className="h-4 w-4 text-gray-300" />
-          </button>
+            <ExternalLink className="h-4 w-4" />
+          </Button>
         </div>
         {copied && (
           <p className="mt-1 text-sm text-green-400">
@@ -118,7 +115,7 @@ export function WalletInfo() {
         )}
       </div>
       {Boolean(hasStaked) && Boolean(stakingDuration) && (
-        <div className="mb-4 rounded-lg border border-blue-500/30 bg-blue-600/20 p-3">
+        <div className="mb-4 border border-blue-500/30 bg-blue-600/20 p-3">
           <div className="flex items-center gap-2 text-blue-200">
             <Clock className="h-4 w-4" />
             <span className="text-sm">
@@ -137,7 +134,7 @@ export function WalletInfo() {
       {/* Token Balances */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {/* NECTR Balance */}
-        <div className="rounded-lg border border-purple-500/30 bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-4">
+        <div className="border border-purple-500/30 bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-4">
           <h3 className="mb-1 text-sm font-medium text-purple-200">
             NECTR Balance
           </h3>
@@ -151,7 +148,7 @@ export function WalletInfo() {
         </div>
 
         {/* Staked Balance */}
-        <div className="rounded-lg border border-green-500/30 bg-gradient-to-br from-green-600/20 to-green-800/20 p-4">
+        <div className="border border-green-500/30 bg-gradient-to-br from-green-600/20 to-green-800/20 p-4">
           <h3 className="mb-1 text-sm font-medium text-green-200">Staked</h3>
           <p className="text-2xl font-bold text-white">
             {stakedLoading ? (
@@ -168,7 +165,7 @@ export function WalletInfo() {
         </div>
 
         {/* Pending Rewards */}
-        <div className="rounded-lg border border-yellow-500/30 bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 p-4">
+        <div className="border border-yellow-500/30 bg-gradient-to-br from-yellow-600/20 to-yellow-800/20 p-4">
           <h3 className="mb-1 text-sm font-medium text-yellow-200">
             Pending Rewards
           </h3>
@@ -190,7 +187,7 @@ export function WalletInfo() {
       {/* Portfolio Summary */}
       <div className="mt-6 border-t border-white/10 pt-4">
         <div className="flex items-center justify-between">
-          <span className="text-gray-300">Total Portfolio Value</span>
+          <span className="">Total Portfolio Value</span>
           <span className="text-xl font-semibold text-white">
             {balanceLoading || stakedLoading || rewardsLoading
               ? 'Loading...'
