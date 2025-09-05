@@ -8,7 +8,7 @@ export const metadata = {
   name: 'NECTR dApp',
   description: 'Decentralized staking ecosystem for NECTR tokens',
   url: inDevEnvironment ? "http://localhost:3000" : process.env.NEXT_PUBLIC_APP_URL as string,
-  icons: ['https://nectr-dapp.vercel.app/favicon.ico'],
+  icons: ['https://nectre.fynix.dev/favicon.ico'],
 }
 export const amoy = {
   id: 80002,
@@ -43,7 +43,6 @@ export const networks = [amoy, polygonAmoy, polygon] as [
 createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  // siweConfig,
   networks,
   defaultNetwork: amoy,
   metadata,
