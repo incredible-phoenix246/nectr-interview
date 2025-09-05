@@ -7,7 +7,7 @@ import { polygon, polygonAmoy } from '@reown/appkit/networks'
 export const metadata = {
   name: 'NECTR dApp',
   description: 'Decentralized staking ecosystem for NECTR tokens',
-  url: inDevEnvironment ? "http://localhost:3000" : process.env.APP_URL as string,
+  url: inDevEnvironment ? "http://localhost:3000" : process.env.NEXT_PUBLIC_APP_URL as string,
   icons: ['https://nectr-dapp.vercel.app/favicon.ico'],
 }
 export const amoy = {
