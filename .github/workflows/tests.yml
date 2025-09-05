@@ -1,9 +1,6 @@
 name: CI
 on:
-  push:
-    branches: [main, dev]
   pull_request:
-    branches: [main]
   workflow_dispatch:
 
 env:
@@ -51,17 +48,22 @@ jobs:
       - uses: actions/checkout@v5
       
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '22'
           cache: 'pnpm'
-          cache-dependency-path: frontend/pnpm-lock.yaml
       
       - name: Install pnpm
         uses: pnpm/action-setup@v4
       
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      
+      - name: Echo and set environment variables
+        run: |
+          echo "Setting up environment variables from FE_ENV secret..."
+          echo "${{ secrets.FE_ENV }}" >> $GITHUB_ENV
+          echo "Environment variables have been loaded."
       
       - name: Run TypeScript check
         run: pnpm type-check
@@ -74,10 +76,6 @@ jobs:
       
       - name: Build application
         run: pnpm build
-        env:
-          NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID }}
-          NEXT_PUBLIC_NECTR_CONTRACT_ADDRESS: "0xD2afEf4d43a6a82CA129a3Adf4231587503408F6"
-          NEXT_PUBLIC_CHAIN_ID: "80002"
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

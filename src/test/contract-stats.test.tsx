@@ -15,7 +15,7 @@ vi.mock('~/hooks/use-nectr-contract', async (importOriginal) => {
   }
 })
 
-let mockUseContractStats: () => { data: any; isLoading: boolean }
+let mockUseContractStats: () => { data: unknown; isLoading: boolean }
 
 describe('ContractStats', () => {
   beforeEach(() => {
