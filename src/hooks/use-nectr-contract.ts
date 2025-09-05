@@ -1,10 +1,10 @@
-import { parseEther, formatEther } from 'viem'
-import { nectrContract } from '~/utils/web3/contracts'
 import {
   useReadContract,
   useWriteContract,
   useWaitForTransactionReceipt,
 } from 'wagmi'
+import { parseEther, formatEther } from 'viem'
+import { nectrContract } from '~/utils/web3/contracts'
 
 export function useNECTRContract() {
   const { writeContract, data: hash, isPending, error } = useWriteContract()
