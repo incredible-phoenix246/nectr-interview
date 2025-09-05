@@ -65,7 +65,7 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         stakingTimestamp[msg.sender] = block.timestamp;
 
         emit Staked(msg.sender, amount, block.timestamp);
-        
+
         return true;
     }
 
@@ -75,7 +75,11 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
      * @return success True if unstaking was successful
      * @return rewardsClaimed Amount of rewards claimed
      */
-    function unstake(uint256 amount) external nonReentrant returns (bool success, uint256 rewardsClaimed) {
+    function unstake(uint256 amount)
+        external
+        nonReentrant
+        returns (bool success, uint256 rewardsClaimed)
+    {
         require(amount > 0, "Cannot unstake 0 tokens");
         require(stakedBalances[msg.sender] >= amount, "Insufficient staked balance");
 
@@ -103,7 +107,7 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         }
 
         emit Unstaked(msg.sender, amount, rewards);
-        
+
         return (true, rewards);
     }
 
@@ -127,7 +131,7 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         _mint(msg.sender, rewards);
 
         emit RewardsClaimed(msg.sender, rewards);
-        
+
         return (true, rewards);
     }
 
@@ -192,7 +196,7 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         stakingRewardRate = newRate;
 
         emit StakingRewardRateUpdated(oldRate, newRate);
-        
+
         return true;
     }
 
@@ -208,7 +212,7 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         minimumStakeAmount = newMinimum;
 
         emit MinimumStakeAmountUpdated(oldAmount, newMinimum);
-        
+
         return true;
     }
 
@@ -236,12 +240,20 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
      * @param amount Amount to withdraw
      * @return success True if withdrawal was successful
      */
-    function emergencyWithdraw(address to, uint256 amount) external onlyOwner whenPaused returns (bool success) {
+    function emergencyWithdraw(
+        address to,
+        uint256 amount
+    )
+        external
+        onlyOwner
+        whenPaused
+        returns (bool success)
+    {
         require(to != address(0), "Invalid address");
         require(balanceOf(address(this)) >= amount, "Insufficient contract balance");
 
         _transfer(address(this), to, amount);
-        
+
         return true;
     }
 
@@ -350,7 +362,7 @@ contract NECTRToken is ERC20, Ownable, ReentrancyGuard, Pausable {
         if (amount == 0 || duration == 0) {
             return 0;
         }
-        
+
         return stakingRewardRate;
     }
 }

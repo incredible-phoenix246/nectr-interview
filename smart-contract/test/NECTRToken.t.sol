@@ -182,20 +182,20 @@ contract NECTRTokenTest is Test {
 
         uint256 balance = nectrToken.getStakedBalance(user1);
         assertEq(balance, STAKE_AMOUNT);
-        
+
         uint256 zeroBalance = nectrToken.getStakedBalance(user2);
         assertEq(zeroBalance, 0);
     }
 
     function test_GetStakingTimestamp() public {
         uint256 timestampBefore = block.timestamp;
-        
+
         vm.prank(user1);
         nectrToken.stake(STAKE_AMOUNT);
 
         uint256 timestamp = nectrToken.getStakingTimestamp(user1);
         assertGe(timestamp, timestampBefore);
-        
+
         uint256 zeroTimestamp = nectrToken.getStakingTimestamp(user2);
         assertEq(zeroTimestamp, 0);
     }
@@ -211,7 +211,7 @@ contract NECTRTokenTest is Test {
 
         // Trigger reward update by calling getPendingRewards
         nectrToken.getPendingRewards(user1);
-        
+
         uint256 zeroRewards = nectrToken.getAccumulatedRewards(user2);
         assertEq(zeroRewards, 0);
     }
