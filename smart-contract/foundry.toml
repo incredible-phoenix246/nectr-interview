@@ -1,0 +1,83 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+test = "test"
+cache_path = "cache"
+remappings = [
+    "@openzeppelin/=lib/openzeppelin-contracts/"
+]
+
+solc_version = "0.8.28"
+optimizer = true
+optimizer_runs = 200
+via_ir = false
+
+evm_version = "paris"
+
+# Testing settings
+gas_reports = ["*"]
+gas_reports_ignore = []
+
+fuzz = { runs = 256 }
+invariant = { runs = 256, depth = 15 }
+
+[rpc_endpoints]
+amoy = "https://rpc-amoy.polygon.technology"
+mumbai = "https://rpc-mumbai.maticvigil.com"
+polygon = "https://polygon-rpc.com"
+
+
+mainnet = "https://eth.llamarpc.com"
+sepolia = "https://ethereum-sepolia-rpc.publicnode.com"
+
+
+localhost = "http://127.0.0.1:8545"
+
+[etherscan]
+amoy = { key = "${POLYGONSCAN_API_KEY}", chain = 80002 }
+mumbai = { key = "${POLYGONSCAN_API_KEY}", chain = 80001 }
+polygon = { key = "${POLYGONSCAN_API_KEY}", chain = 137 }
+
+
+[fmt]
+line_length = 100
+tab_width = 4
+bracket_spacing = false
+int_types = "long"
+multiline_func_header = "all"
+quote_style = "double"
+number_underscore = "thousands"
+
+[doc]
+out = "docs"
+title = "NECTR Token Documentation"
+book = "book.toml"
+homepage = "src/SUMMARY.md"
+
+[profile.production]
+src = "src"
+out = "out"
+libs = ["lib"]
+optimizer = true
+optimizer_runs = 1000
+via_ir = true
+
+[profile.local]
+src = "src"
+out = "out"
+libs = ["lib"]
+optimizer = false
+via_ir = false
+
+[profile.gas_price]
+amoy = 30_000_000_000      # 30 gwei
+mumbai = 30_000_000_000    # 30 gwei
+polygon = 50_000_000_000   # 50 gwei
+
+[profile.compiler]
+ignored_error_codes = []
+deny_warnings = false
+
+[profile.cache]
+clean_on_recompile = false

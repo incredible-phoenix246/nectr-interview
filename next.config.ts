@@ -1,7 +1,14 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
+import { inDevEnvironment } from '~/lib/utils'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+  typedRoutes: true,
+  experimental: {
+    typedEnv: true,
+  },
+  compiler: {
+    removeConsole: !inDevEnvironment,
+  },
+}
 
-export default nextConfig;
+export default nextConfig
