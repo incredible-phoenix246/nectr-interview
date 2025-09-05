@@ -46,6 +46,156 @@ A full-stack decentralized application featuring ERC-20 token staking, real-time
 * **Tailwind CSS** for responsive styling
 * **Lucide React** for icons
 
+## 🏗️ Frontend Architecture & Technical Decisions
+
+### Core Framework Choices
+
+**Next.js 15 with TypeScript** was chosen as the foundation for several strategic reasons:
+
+1. **App Router Architecture**: Leveraging Next.js's latest app directory structure for better file-system routing and layout management
+2. **Server-Side Rendering (SSR)**: Critical for Web3 applications to handle wallet connection states properly across page loads
+3. **Turbopack Integration**: Faster development builds (enabled via `--turbopack` flag in package.json scripts)
+4. **TypeScript**: Essential for Web3 development to catch ABI-related type errors and ensure contract interaction safety
+
+### Web3 Integration Strategy
+
+**Reown AppKit (formerly WalletConnect) + Wagmi v2** forms the core Web3 stack:
+
+```typescript
+// Custom wagmi configuration with multi-network support
+export const wagmiAdapter = new WagmiAdapter({
+  ssr: true,
+  projectId,
+  networks: [amoy, polygonAmoy, polygon],
+})
+```
+
+**Why This Stack?**
+- **Universal Wallet Support**: AppKit provides out-of-the-box support for 350+ wallets
+- **SSR Compatibility**: Critical for Next.js applications to avoid hydration mismatches
+- **Type Safety**: Wagmi v2 provides full TypeScript support for contract interactions
+- **React Query Integration**: Automatic caching and refetching of blockchain data
+
+### State Management Architecture
+
+**React Query + Wagmi Hooks** eliminates the need for traditional state management:
+
+```typescript
+// Custom hook for contract interactions
+export function useNECTRContract() {
+  const { writeContract, data: hash, isPending, error } = useWriteContract()
+  
+  // Real-time data fetching with automatic refetch
+  const usePendingRewards = (address?: Address) => {
+    return useReadContract({
+      ...nectrContract,
+      functionName: 'getPendingRewards',
+      args: address ? [address] : undefined,
+      query: {
+        enabled: !!address,
+        refetchInterval: 10000, // Auto-refresh every 10 seconds
+      },
+    })
+  }
+}
+```
+
+**Benefits:**
+- **Real-time Updates**: Automatic blockchain data synchronization
+- **Optimistic Updates**: Immediate UI feedback during transactions
+- **Error Handling**: Built-in retry logic and error boundaries
+- **Performance**: Intelligent caching reduces unnecessary RPC calls
+
+### Styling System Design
+
+**Tailwind CSS v4 + CSS Variables** approach for maximum flexibility:
+
+```css
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  /* Dynamic theme system */
+}
+```
+
+**Key Design Decisions:**
+1. **Glassmorphism UI**: `backdrop-blur-md` and opacity layers for modern Web3 aesthetic
+2. **CSS Variables**: Enable dynamic theme switching without build-time compilation
+3. **Mobile-First**: Responsive design using `max-md:` prefixes for optimal mobile experience
+4. **Design System**: Custom color palette optimized for dark themes and Web3 interfaces
+
+### Component Architecture
+
+**Custom Hook Pattern** for reusable contract logic:
+
+```typescript
+// Centralized contract interactions
+const {
+  useBalance,
+  useStakedBalance,
+  usePendingRewards,
+  stakeTokens,
+  unstakeTokens,
+} = useNECTRContract()
+```
+
+**Modular Component Design:**
+- **Transaction Status**: Real-time transaction monitoring with PolygonScan links
+- **Wallet Info**: Dynamic balance display with auto-refresh
+- **Contract Stats**: Live TVL and staking metrics
+- **Social Integration**: Embedded Twitter feeds and community links
+
+### Performance Optimizations
+
+1. **Code Splitting**: Next.js automatic code splitting reduces initial bundle size
+2. **Image Optimization**: Next.js Image component for responsive images
+3. **Bundle Analysis**: Prettier + ESLint configured for consistent code quality
+4. **Lazy Loading**: Components loaded on-demand to improve initial page load
+
+### Security Implementations
+
+**Type-Safe Contract Interactions:**
+```typescript
+// ABI-generated types prevent runtime errors
+const nectrContract = {
+  abi: NECTRTokenABI as const,
+  address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+}
+```
+
+**Environment Variable Management:**
+- Separate build-time and runtime environment handling
+- Secure API key management for external services
+- Development vs. production URL switching
+
+### Testing Strategy
+
+**Vitest + React Testing Library** for comprehensive testing:
+
+```json
+{
+  "test": "vitest",
+  "test:watch": "vitest --watch", 
+  "test:ui": "vitest --ui"
+}
+```
+
+**Testing Focus Areas:**
+- Component rendering with mock wallet states
+- Contract interaction hooks with mock blockchain responses
+- User interaction flows and error handling
+- Responsive design across device sizes
+
+### Development Experience
+
+**Developer Productivity Features:**
+- **Hot Reload**: Turbopack-enabled fast refresh during development
+- **Type Checking**: Separate `type-check` script for CI/CD integration
+- **Linting**: ESLint with Next.js and TypeScript rules
+- **Formatting**: Prettier with Tailwind CSS plugin for consistent styling
+
+This architecture prioritizes **type safety**, **performance**, and **user experience** while maintaining **developer productivity** and **code maintainability**. Every technical decision was made to support the core Web3 functionality while providing a seamless user interface for staking operations.
+
 ### Key Contract Features
 
 * 5% APY staking mechanism
