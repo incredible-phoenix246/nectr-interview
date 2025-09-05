@@ -93,7 +93,7 @@ export function SocialFeed() {
           {!twitterLoaded && (
             <div className="flex h-64 items-center justify-center text-gray-400">
               <div className="text-center">
-                <div className="mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-2 border-blue-400 border-t-transparent"></div>
+                <div className="mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-2 border-blue-400 border-t-transparent" />
                 <p>Loading Twitter feed...</p>
               </div>
             </div>

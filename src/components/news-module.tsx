@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import {
   Newspaper,
   Filter,
@@ -8,6 +7,8 @@ import {
   ExternalLink,
   TrendingUp,
 } from 'lucide-react'
+import { useState } from 'react'
+import { toast } from 'sonner'
 
 interface NewsArticle {
   id: string
@@ -114,6 +115,15 @@ export function NewsModule() {
     }
   }
 
+
+  const handleArticleClick = (url: string) => {
+    if (!url || url === '#') {
+      toast.error('This article page is not available yet 🚫')
+      return
+    }
+    window.open(url, '_blank')
+  }
+
   return (
     <div className="rounded-xl border border-white/20 bg-white/10 p-6 backdrop-blur-md">
       <div className="mb-6 flex items-center justify-between">
@@ -143,11 +153,12 @@ export function NewsModule() {
       </div>
 
       {/* News Articles */}
-      <div className="max-h-96 space-y-4 overflow-y-auto">
+      <div className="h-full space-y-4 overflow-y-auto">
         {filteredArticles.map((article) => (
           <article
             key={article.id}
-            className={`bg-gradient-to-r ${getCategoryColor(article.category)} group cursor-pointer rounded-lg border p-4 transition-all duration-200 hover:scale-[1.02]`}
+            onClick={() => handleArticleClick(article.url)}
+            className={`bg-gradient-to-r ${getCategoryColor(article.category)} group cursor-pointer rounded-lg border p-4 transition-all duration-200`}
           >
             <div className="flex gap-4">
               {article.imageUrl && (

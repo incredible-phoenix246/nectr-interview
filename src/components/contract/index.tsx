@@ -15,9 +15,9 @@ export function ContractStats() {
           Contract Statistics
         </h2>
         <div className="animate-pulse space-y-4">
-          <div className="h-20 rounded-lg bg-white/5"></div>
-          <div className="h-20 rounded-lg bg-white/5"></div>
-          <div className="h-20 rounded-lg bg-white/5"></div>
+          <div className="h-20 rounded-lg bg-white/5" data-testid="skeleton" />
+          <div className="h-20 rounded-lg bg-white/5" data-testid="skeleton" />
+          <div className="h-20 rounded-lg bg-white/5" data-testid="skeleton" />
         </div>
       </div>
     )
@@ -135,7 +135,7 @@ export function ContractStats() {
           <div
             className="h-2 rounded-full bg-gradient-to-r from-green-500 to-blue-500 transition-all duration-300"
             style={{ width: `${Math.min(stakingPercentage, 100)}%` }}
-          ></div>
+          />
         </div>
         <p className="mt-1 text-xs text-gray-400">
           {totalStaked && totalSupply
