@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NECTR dApp Demo
 
-## Getting Started
+## 🌐 Overview
 
-First, run the development server:
+A full-stack decentralized application featuring ERC-20 token staking, real-time portfolio insights, social media integration, and dynamic news feeds — built with modern Web3 and frontend frameworks.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Live Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Demo URL**: [nectre.fynix.dev](https://nectre.fynix.dev/)
+* **Contract**: [0xD2afEf4d43a6a82CA129a3Adf4231587503408F6](https://amoy.polygonscan.com/address/0xD2afEf4d43a6a82CA129a3Adf4231587503408F6)
+* **Network**: Polygon Amoy Testnet
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Core Requirements
 
-## Learn More
+* ✅ ERC-20 NECTR token with advanced staking functionality
+* ✅ Modern wallet integration (Reown AppKit)
+* ✅ Real-time staking interface with validation
+* ✅ Social media integration (Twitter feed + community links)
+* ✅ News module with category filtering
 
-To learn more about Next.js, take a look at the following resources:
+### Advanced Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* ✅ Real-time staking duration + portfolio tracking
+* ✅ Daily reward estimation with live APY
+* ✅ Type-safe smart contract interactions
+* ✅ Transaction tracking with PolygonScan links
+* ✅ Responsive glassmorphism UI design
+* ✅ Mobile-first optimization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+### Smart Contracts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* **Solidity**: ^0.8.28
+* **Foundry**: Development, testing & deployment
+* **OpenZeppelin**: Security libraries
+* **Network**: Polygon Amoy (Chain ID: 80002)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Frontend
+
+* **Next.js 15** with **TypeScript**
+* **Reown AppKit** for wallet connectivity
+* **Wagmi v2** for contract interactions
+* **Tailwind CSS** for responsive styling
+* **Lucide React** for icons
+
+### Key Contract Features
+
+* 5% APY staking mechanism
+* Real-time reward calculations
+* Built-in safeguards (ReentrancyGuard, Pausable)
+* Comprehensive getter functions
+* Owner controls for parameters
+
+## 🎯 How to Use
+
+1. **Connect Wallet**: Use MetaMask or another supported wallet
+2. **Switch Network**: Ensure Polygon Amoy Testnet is selected
+3. **Request Test Tokens**: Contact demo presenter for NECTR tokens
+4. **Stake & Unstake**: Interact with the staking interface
+5. **Explore Features**: Browse news feeds and community integrations
+
+## 📊 Contract Stats
+
+* **Total Supply**: 1,000,000 NECTR
+* **APY**: 5%
+* **Minimum Stake**: 10 NECTR
+* **TVL**: Displayed live in dApp
+
+## 🔗 Resources
+
+* **Live App**: [nectre.fynix.dev](https://nectre.fynix.dev/)
+* **Smart Contract**: [PolygonScan Link](https://amoy.polygonscan.com/address/0xD2afEf4d43a6a82CA129a3Adf4231587503408F6)
+* **GitHub Repository**: \[Your Repo Link]
+
+## 🏆 Highlights
+
+* Verified and deployed smart contract
+* Professional-grade UI/UX with glassmorphism
+* Real-time on-chain + off-chain data integration
+* Full mobile responsiveness
+* Robust error handling throughout
+
+---
