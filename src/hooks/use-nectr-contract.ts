@@ -3,8 +3,8 @@ import {
   useWriteContract,
   useWaitForTransactionReceipt,
 } from 'wagmi'
-import { parseEther, formatEther } from 'viem'
 import { nectrContract } from '~/utils/web3/contracts'
+import { parseEther, formatEther, type Address } from 'viem'
 
 export function useNECTRContract() {
   const { writeContract, data: hash, isPending, error } = useWriteContract()
@@ -14,7 +14,7 @@ export function useNECTRContract() {
       hash,
     })
 
-  const useBalance = (address?: `0x${string}`) => {
+  const useBalance = (address?: Address) => {
     return useReadContract({
       ...nectrContract,
       functionName: 'balanceOf',
@@ -25,10 +25,10 @@ export function useNECTRContract() {
     })
   }
 
-  const useStakedBalance = (address?: `0x${string}`) => {
+  const useStakedBalance = (address?: Address) => {
     return useReadContract({
       ...nectrContract,
-      functionName: 'stakedBalances',
+      functionName: 'getStakedBalance',
       args: address ? [address] : undefined,
       query: {
         enabled: !!address,
@@ -36,7 +36,7 @@ export function useNECTRContract() {
     })
   }
 
-  const usePendingRewards = (address?: `0x${string}`) => {
+  const usePendingRewards = (address?: Address) => {
     return useReadContract({
       ...nectrContract,
       functionName: 'getPendingRewards',
@@ -55,7 +55,39 @@ export function useNECTRContract() {
     })
   }
 
-  // Write functions
+  const useStakingInfo = (address?: Address) => {
+    return useReadContract({
+      ...nectrContract,
+      functionName: 'getStakingInfo',
+      args: address ? [address] : undefined,
+      query: {
+        enabled: !!address,
+      },
+    })
+  }
+
+  const useStakingDuration = (address?: Address) => {
+    return useReadContract({
+      ...nectrContract,
+      functionName: 'getStakingDuration',
+      args: address ? [address] : undefined,
+      query: {
+        enabled: !!address,
+      },
+    })
+  }
+
+  const useHasStakedTokens = (address?: Address) => {
+    return useReadContract({
+      ...nectrContract,
+      functionName: 'hasStakedTokens',
+      args: address ? [address] : undefined,
+      query: {
+        enabled: !!address,
+      },
+    })
+  }
+
   const stakeTokens = async (amount: string) => {
     return writeContract({
       ...nectrContract,
@@ -79,19 +111,37 @@ export function useNECTRContract() {
     })
   }
 
+  const setStakingRewardRate = async (newRate: number) => {
+    return writeContract({
+      ...nectrContract,
+      functionName: 'setStakingRewardRate',
+      args: [BigInt(newRate)],
+    })
+  }
+
+  const setMinimumStakeAmount = async (newMinimum: string) => {
+    return writeContract({
+      ...nectrContract,
+      functionName: 'setMinimumStakeAmount',
+      args: [parseEther(newMinimum)],
+    })
+  }
+
   return {
-    // Read hooks
     useBalance,
     useStakedBalance,
     usePendingRewards,
     useContractStats,
+    useStakingInfo,
+    useStakingDuration,
+    useHasStakedTokens,
 
-    // Write functions
     stakeTokens,
     unstakeTokens,
     claimRewards,
+    setStakingRewardRate,
+    setMinimumStakeAmount,
 
-    // Transaction state
     isPending,
     isConfirming,
     isConfirmed,
@@ -103,4 +153,30 @@ export function useNECTRContract() {
 export const formatTokenAmount = (amount: bigint | undefined, decimals = 4) => {
   if (!amount) return '0'
   return parseFloat(formatEther(amount)).toFixed(decimals)
+}
+
+export const formatDuration = (seconds: bigint | undefined) => {
+  if (!seconds) return '0s'
+
+  const numSeconds = Number(seconds)
+  const days = Math.floor(numSeconds / (24 * 60 * 60))
+  const hours = Math.floor((numSeconds % (24 * 60 * 60)) / (60 * 60))
+  const minutes = Math.floor((numSeconds % (60 * 60)) / 60)
+
+  if (days > 0) return `${days}d ${hours}h`
+  if (hours > 0) return `${hours}h ${minutes}m`
+  return `${minutes}m`
+}
+
+export const formatStakingInfo = (stakingInfo: readonly [bigint, bigint, bigint] | undefined) => {
+  if (!stakingInfo) return null
+
+  const [stakedAmount, pendingRewards, stakingSince] = stakingInfo
+
+  return {
+    stakedAmount: formatTokenAmount(stakedAmount),
+    pendingRewards: formatTokenAmount(pendingRewards),
+    stakingSince: new Date(Number(stakingSince) * 1000),
+    stakingDuration: formatDuration(BigInt(Math.floor(Date.now() / 1000)) - stakingSince)
+  }
 }

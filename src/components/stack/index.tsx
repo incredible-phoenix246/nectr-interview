@@ -60,13 +60,15 @@ export function StakingInterface() {
 
   const setMaxStake = () => {
     if (balance) {
-      setStakeAmount(formatTokenAmount(balance, 6))
+      setStakeAmount(formatTokenAmount(balance as bigint | undefined, 6))
     }
   }
 
   const setMaxUnstake = () => {
     if (stakedBalance) {
-      setUnstakeAmount(formatTokenAmount(stakedBalance, 6))
+      setUnstakeAmount(
+        formatTokenAmount(stakedBalance as bigint | undefined, 6)
+      )
     }
   }
 
@@ -84,10 +86,10 @@ export function StakingInterface() {
   const stakeAmountNum = parseFloat(stakeAmount || '0')
   const unstakeAmountNum = parseFloat(unstakeAmount || '0')
   const availableBalance = balance
-    ? parseFloat(formatTokenAmount(balance, 6))
+    ? parseFloat(formatTokenAmount(balance as bigint | undefined, 6))
     : 0
   const availableStaked = stakedBalance
-    ? parseFloat(formatTokenAmount(stakedBalance, 6))
+    ? parseFloat(formatTokenAmount(stakedBalance as bigint | undefined, 6))
     : 0
 
   const stakeError =
@@ -120,7 +122,8 @@ export function StakingInterface() {
               Amount to Stake
             </label>
             <span className="text-sm text-gray-400">
-              Available: {formatTokenAmount(balance)} NECTR
+              Available: {formatTokenAmount(balance as bigint | undefined)}{' '}
+              NECTR
             </span>
           </div>
 
@@ -175,7 +178,8 @@ export function StakingInterface() {
               Amount to Unstake
             </label>
             <span className="text-sm text-gray-400">
-              Staked: {formatTokenAmount(stakedBalance)} NECTR
+              Staked: {formatTokenAmount(stakedBalance as bigint | undefined)}{' '}
+              NECTR
             </span>
           </div>
 
@@ -226,7 +230,7 @@ export function StakingInterface() {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-2xl font-bold text-white">
-              {formatTokenAmount(pendingRewards)} NECTR
+              {formatTokenAmount(pendingRewards as bigint | undefined)} NECTR
             </p>
             <p className="text-sm text-yellow-200">
               Rewards accumulate every second

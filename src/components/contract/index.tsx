@@ -24,9 +24,8 @@ export function ContractStats() {
   }
 
   const [totalSupply, totalStaked, stakingRewardRate, minimumStakeAmount] =
-    stats || []
+    Array.isArray(stats) ? stats : []
 
-  // Calculate staking percentage
   const stakingPercentage =
     totalSupply && totalStaked
       ? (Number(totalStaked) / Number(totalSupply)) * 100
@@ -107,10 +106,10 @@ export function ContractStats() {
             <span className="text-gray-300">Contract Address:</span>
             <div className="flex items-center gap-1">
               <span className="font-mono text-xs text-white">
-                0xa2225d...ae7AA6
+                0xD2afEf...08F6
               </span>
               <a
-                href="https://amoy.polygonscan.com/address/0xa2225d1825ec6E8Ba2AAAf9DF3106D0543ae7AA6"
+                href="https://amoy.polygonscan.com/address/0xD2afEf4d43a6a82CA129a3Adf4231587503408F6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-purple-400 hover:text-purple-300"
