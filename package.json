@@ -10,7 +10,8 @@
     "lint:fix": "eslint --fix",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@dicebear/collection": "^9.2.4",
