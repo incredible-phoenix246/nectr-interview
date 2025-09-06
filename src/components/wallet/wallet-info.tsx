@@ -145,7 +145,7 @@ export function WalletInfo() {
           </h3>
           <p className="text-2xl font-bold text-white">
             {balanceLoading ? (
-              <span className="animate-pulse">t('staking.loading')</span>
+              <span className="animate-pulse">{t('staking.loading')}</span>
             ) : (
               `${formatTokenAmount(balance as bigint | undefined)} NECTR`
             )}
@@ -159,7 +159,7 @@ export function WalletInfo() {
           </h3>
           <p className="text-2xl font-bold text-white">
             {stakedLoading ? (
-              <span className="animate-pulse">t('staking.loading')</span>
+              <span className="animate-pulse">{t('staking.loading')}</span>
             ) : (
               `${formatTokenAmount(stakedBalance as bigint | undefined)} NECTR`
             )}
@@ -178,7 +178,7 @@ export function WalletInfo() {
           </h3>
           <p className="text-2xl font-bold text-white">
             {rewardsLoading ? (
-              <span className="animate-pulse">t('staking.loading')</span>
+              <span className="animate-pulse">{t('staking.loading')}</span>
             ) : (
               `${formatTokenAmount(pendingRewards as bigint | undefined)} NECTR`
             )}
