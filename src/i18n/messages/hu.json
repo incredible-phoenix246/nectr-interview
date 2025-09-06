@@ -1,0 +1,102 @@
+{
+  "app": {
+    "title": "NECTR dApp"
+  },
+  "wallet": {
+    "connect": "Tárca csatlakoztatása",
+    "connecting": "Csatlakozás...",
+    "disconnect": "Tárca leválasztása",
+    "connectPrompt": "Csatlakoztassa a tárcáját",
+    "connectDescription": "Csatlakoztassa a tárcáját a NECTR portfólió megtekintéséhez",
+    "walletAddress": "Tárca címe",
+    "addressCopied": "Cím a vágólapra másolva!",
+    "viewOnPolygonScan": "Megtekintés PolygonScan-en"
+  },
+  "staking": {
+    "stakingFor": "Letétbe helyezés ideje:",
+    "since": "Kezdete:",
+    "nectrBalance": "NECTR egyenleg",
+    "staked": "Letétben",
+    "pendingRewards": "Függőben lévő jutalmak",
+    "loading": "Betöltés...",
+    "activeStakingPosition": "Aktív letéti pozíció",
+    "accumulatingRewards": "Gyűjtés 5% APY-vel",
+    "totalPortfolioValue": "Teljes portfólió érték",
+    "stakingRatio": "Letéti arány:",
+    "estimatedDailyRewards": "Becsült napi jutalmak:",
+    "interface": "Letéti felület",
+    "stakeTokens": "NECTR tokenek letétbe helyezése",
+    "amountToStake": "Letétbe helyezendő összeg",
+    "available": "Elérhető:",
+    "max": "MAX",
+    "stake": "Letétbe helyezés",
+    "processing": "Feldolgozás...",
+    "minimumStake": "Minimum letét: 10 NECTR • Jelenlegi APY: 5%",
+    "unstakeTokens": "Tokenek kivétele",
+    "amountToUnstake": "Kivenni kívánt összeg",
+    "unstake": "Kivétel",
+    "unstaking": "Kivétel...",
+    "rewards": "Függőben lévő jutalmak",
+    "rewardsAccumulate": "A jutalmak minden másodpercben gyűlnek",
+    "claimRewards": "Jutalmak igénylése",
+    "claiming": "Igénylés...",
+    "transactionPending": "Tranzakció függőben...",
+    "waitingForConfirmation": "Várakozás megerősítésre...",
+    "transactionConfirmed": "✅ Tranzakció megerősítve!",
+    "transactionError": "❌ Hiba:",
+    "errors": {
+      "insufficientBalance": "Elégtelen egyenleg",
+      "minimumStakeRequired": "Minimum 10 NECTR letét szükséges",
+      "insufficientStakedBalance": "Elégtelen letéti egyenleg"
+    },
+    "toasts": {
+      "stakingTokens": "Tokenek letétbe helyezése...",
+      "tokensStakedSuccessfully": "Tokenek sikeresen letétbe helyezve!",
+      "stakingFailed": "Letétbe helyezés sikertelen:",
+      "unstakingTokens": "Tokenek kivétele...",
+      "tokensUnstakedSuccessfully": "Tokenek sikeresen kivéve!",
+      "unstakingFailed": "Kivétel sikertelen:",
+      "claimingRewards": "Jutalmak igénylése...",
+      "rewardsClaimedSuccessfully": "Jutalmak sikeresen igényelve!",
+      "claimingRewardsFailed": "Jutalmak igénylése sikertelen:"
+    }
+  },
+  "stats": {
+    "contractStatistics": "Szerződés statisztikák",
+    "totalSupply": "Teljes kínálat",
+    "maximumTokenSupply": "Maximális token kínálat",
+    "totalStaked": "Összesen letétben",
+    "percentageOfSupplyStaked": "% a kínálatból letétben",
+    "stakingAPY": "Letéti APY",
+    "annualPercentageYield": "Éves százalékos hozam",
+    "minimumStake": "Minimum letét",
+    "requiredMinimumAmount": "Szükséges minimum összeg",
+    "contractAddress": "Szerződés címe:",
+    "network": "Hálózat:",
+    "polygonAmoy": "Polygon Amoy",
+    "stakingProgress": "Letéti előrehaladás",
+    "tokensStaked": "token letétben",
+    "loadingStakingData": "Letéti adatok betöltése..."
+  },
+  "news": {
+    "latestNews": "Legfrissebb hírek",
+    "all": "Összes",
+    "blockchain": "Blokklánc",
+    "beeNews": "Méh hírek",
+    "yesterday": "Tegnap",
+    "daysAgo": "napja",
+    "articleNotAvailable": "Ez a cikk még nem elérhető 🚫",
+    "stayUpdated": "Maradjon naprakész a legfrissebb NECTR ökoszisztéma és blokklánc hírekre"
+  },
+  "social": {
+    "communityHub": "Közösségi központ",
+    "twitter": "Twitter",
+    "followUpdates": "Frissítések követése",
+    "telegram": "Telegram",
+    "joinChat": "Csatlakozás a chathez",
+    "discord": "Discord",
+    "community": "Közösség",
+    "latestUpdates": "Legfrissebb frissítések",
+    "loadingTwitterFeed": "Twitter feed betöltése..."
+  }
+}
