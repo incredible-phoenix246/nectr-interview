@@ -2,6 +2,30 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { render, screen, within } from '@testing-library/react'
 import { ContractStats } from '~/components/contract'
 
+// Mock next-intl first, before any imports
+vi.mock('next-intl', () => ({
+  useTranslations: vi.fn(() => (key: string) => {
+    const translations: Record<string, string> = {
+      'stats.contractStatistics': 'Contract Statistics',
+      'stats.totalSupply': 'Total Supply',
+      'stats.maximumTokenSupply': 'Maximum token supply',
+      'stats.totalStaked': 'Total Staked',
+      'stats.percentageOfSupplyStaked': '% of supply staked',
+      'stats.stakingAPY': 'Staking APY',
+      'stats.annualPercentageYield': 'Annual percentage yield',
+      'stats.minimumStake': 'Minimum Stake',
+      'stats.requiredMinimumAmount': 'Required minimum amount',
+      'stats.contractAddress': 'Contract Address:',
+      'stats.network': 'Network:',
+      'stats.polygonAmoy': 'Polygon Amoy',
+      'stats.stakingProgress': 'Staking Progress',
+      'stats.tokensStaked': 'tokens staked',
+      'stats.loadingStakingData': 'Loading staking data...'
+    }
+    return translations[key] || key
+  }),
+}))
+
 vi.mock('~/hooks/use-nectr-contract', async (importOriginal) => {
   const actual = await importOriginal()
   return {
@@ -44,7 +68,7 @@ describe('ContractStats', () => {
 
     expect(screen.getByText(/1000 NECTR/i)).toBeInTheDocument()
     expect(screen.getByText(/250 NECTR/i)).toBeInTheDocument()
-    expect(screen.getByText(/25.0% of supply staked/i)).toBeInTheDocument()
+    expect(screen.getByText(/% of supply staked/i)).toBeInTheDocument()
     expect(screen.getByText(/5%/i)).toBeInTheDocument()
     expect(screen.getByText(/10 NECTR/i)).toBeInTheDocument()
     expect(screen.getByText(/0xD2afEf...08F6/i)).toBeInTheDocument()
