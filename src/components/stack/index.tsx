@@ -5,9 +5,11 @@ import { useAccount } from 'wagmi'
 import { startTransition, useState } from 'react'
 import { Coins, TrendingUp, Gift, AlertTriangle } from 'lucide-react'
 import { formatTokenAmount, useNECTRContract } from '~/hooks/use-nectr-contract'
+import { useTranslations } from 'next-intl'
 
 export function StakingInterface() {
   const { address } = useAccount()
+  const t = useTranslations()
   const {
     useBalance,
     useStakedBalance,
@@ -34,16 +36,18 @@ export function StakingInterface() {
     setTransactionType('stake')
     startTransition(async () => {
       if (!stakeAmount || parseFloat(stakeAmount) <= 0) return
-      toast.info('Staking tokens...')
+      toast.info(t('staking.toasts.stakingTokens'))
       await stakeTokens(stakeAmount)
         .then(() => {
           if (!isPending && !isConfirming) {
-            toast.success('Tokens staked successfully!')
+            toast.success(t('staking.toasts.tokensStakedSuccessfully'))
             setStakeAmount('')
           }
         })
         .catch((err) => {
-          toast.error(`Staking failed: ${err?.message || 'Unknown error'}`)
+          toast.error(
+            `${t('staking.toasts.stakingFailed')} ${err?.message || 'Unknown error'}`
+          )
           console.error('Staking failed:', err)
         })
     })
@@ -53,15 +57,17 @@ export function StakingInterface() {
     setTransactionType('unstake')
     startTransition(async () => {
       if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) return
-      toast.info('Unstaking tokens...')
+      toast.info(t('staking.toasts.unstakingTokens'))
       await unstakeTokens(unstakeAmount)
         .then(() => {
           if (!isPending || (!isConfirming && transactionType === 'unstake')) {
-            toast.success('Tokens unstaked successfully!')
+            toast.success(t('staking.toasts.tokensUnstakedSuccessfully'))
           }
         })
         .catch((err) => {
-          toast.error(`Unstaking failed: ${err?.message || 'Unknown error'}`)
+          toast.error(
+            `${t('staking.toasts.unstakingFailed')} ${err?.message || 'Unknown error'}`
+          )
           console.error('Unstaking failed:', err)
         })
     })
@@ -70,16 +76,16 @@ export function StakingInterface() {
   const handleClaimRewards = async () => {
     setTransactionType('claim')
     startTransition(async () => {
-      toast.info('Claiming rewards...')
+      toast.info(t('staking.toasts.claimingRewards'))
       await claimRewards()
         .then(() => {
           if (!isPending || (!isConfirming && transactionType === 'claim')) {
-            toast.success('Rewards claimed successfully!')
+            toast.success(t('staking.toasts.rewardsClaimedSuccessfully'))
           }
         })
         .catch((err) => {
           toast.error(
-            `Claiming rewards failed: ${err?.message || 'Unknown error'}`
+            `${t('staking.toasts.claimingRewardsFailed')} ${err?.message || 'Unknown error'}`
           )
           console.error('Claiming rewards failed:', err)
         })
@@ -122,40 +128,44 @@ export function StakingInterface() {
 
   const stakeError =
     stakeAmountNum > availableBalance
-      ? 'Insufficient balance'
+      ? t('staking.errors.insufficientBalance')
       : stakeAmountNum > 0 && stakeAmountNum < 10
-        ? 'Minimum stake is 10 NECTR'
+        ? t('staking.errors.minimumStakeRequired')
         : null
 
   const unstakeError =
-    unstakeAmountNum > availableStaked ? 'Insufficient staked balance' : null
+    unstakeAmountNum > availableStaked
+      ? t('staking.errors.insufficientStakedBalance')
+      : null
 
   const getStakeButtonText = () => {
     if (isPending || (isConfirming && transactionType === 'stake'))
-      return 'Processing...'
-    return 'Stake'
+      return t('staking.processing')
+    return t('staking.stake')
   }
 
   return (
     <div className="bg-card border border-dashed p-6 backdrop-blur-md">
       <h2 className="mb-6 flex items-center gap-2 text-2xl font-semibold">
         <Coins className="h-6 w-6" />
-        Staking Interface
+        {t('staking.interface')}
       </h2>
 
       {/* Staking Section */}
       <div className="mb-8">
         <h3 className="mb-4 flex items-center gap-2 text-lg font-medium">
           <TrendingUp className="h-5 w-5 text-green-400" />
-          Stake NECTR Tokens
+          {t('staking.stakeTokens')}
         </h3>
 
         <div className="bg-background mb-4 p-4">
           <div className="mb-2 flex items-center justify-between">
-            <label className="text-sm font-medium">Amount to Stake</label>
+            <label className="text-sm font-medium">
+              {t('staking.amountToStake')}
+            </label>
             <span className="text-sm">
-              Available: {formatTokenAmount(balance as bigint | undefined)}{' '}
-              NECTR
+              {t('staking.available')}{' '}
+              {formatTokenAmount(balance as bigint | undefined)} NECTR
             </span>
           </div>
 
@@ -174,7 +184,7 @@ export function StakingInterface() {
                 onClick={setMaxStake}
                 className="absolute top-1/2 right-3 -translate-y-1/2 transform text-sm font-medium text-purple-400 hover:text-purple-300"
               >
-                MAX
+                {t('staking.max')}
               </button>
             </div>
 
@@ -195,23 +205,25 @@ export function StakingInterface() {
           )}
 
           <p className="mt-2 text-xs text-gray-400">
-            Minimum stake: 10 NECTR • Current APY: 5%
+            {t('staking.minimumStake')}
           </p>
         </div>
       </div>
 
       {/* Unstaking Section */}
       <div className="mb-8">
-        <h3 className="mb-4 text-lg font-medium text-white">Unstake Tokens</h3>
+        <h3 className="mb-4 text-lg font-medium text-white">
+          {t('staking.unstakeTokens')}
+        </h3>
 
         <div className="bg-background mb-4 p-4">
           <div className="mb-2 flex items-center justify-between">
             <label className="text-sm font-medium text-gray-300">
-              Amount to Unstake
+              {t('staking.amountToUnstake')}
             </label>
             <span className="text-sm text-gray-400">
-              Staked: {formatTokenAmount(stakedBalance as bigint | undefined)}{' '}
-              NECTR
+              {t('staking.staked')}:{' '}
+              {formatTokenAmount(stakedBalance as bigint | undefined)} NECTR
             </span>
           </div>
 
@@ -230,7 +242,7 @@ export function StakingInterface() {
                 onClick={setMaxUnstake}
                 className="absolute top-1/2 right-3 -translate-y-1/2 transform text-sm font-medium text-purple-400 hover:text-purple-300"
               >
-                MAX
+                {t('staking.max')}
               </button>
             </div>
 
@@ -240,8 +252,8 @@ export function StakingInterface() {
               className="bg-gradient-to-r from-red-600 to-pink-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-red-700 hover:to-pink-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
             >
               {isPending || (isConfirming && transactionType === 'unstake')
-                ? 'Unstaking...'
-                : 'Unstake'}
+                ? t('staking.unstaking')
+                : t('staking.unstake')}
             </button>
           </div>
 
@@ -258,7 +270,7 @@ export function StakingInterface() {
       <div className="border border-yellow-500/30 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 p-4">
         <h3 className="mb-3 flex items-center gap-2 text-lg font-medium text-white">
           <Gift className="h-5 w-5 text-yellow-400" />
-          Pending Rewards
+          {t('staking.rewards')}
         </h3>
 
         <div className="flex items-center justify-between">
@@ -267,7 +279,7 @@ export function StakingInterface() {
               {formatTokenAmount(pendingRewards as bigint | undefined)} NECTR
             </p>
             <p className="text-sm text-yellow-200">
-              Rewards accumulate every second
+              {t('staking.rewardsAccumulate')}
             </p>
           </div>
 
@@ -277,8 +289,8 @@ export function StakingInterface() {
             className="bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-yellow-700 hover:to-orange-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
           >
             {isPending || (isConfirming && transactionType === 'claim')
-              ? 'Claiming...'
-              : 'Claim Rewards'}
+              ? t('staking.claiming')
+              : t('staking.claimRewards')}
           </button>
         </div>
       </div>
@@ -289,18 +301,18 @@ export function StakingInterface() {
           {isPending && (
             <div className="flex items-center gap-2 text-yellow-400">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-yellow-400 border-t-transparent"></div>
-              <span>Transaction pending...</span>
+              <span>{t('staking.transactionPending')}</span>
             </div>
           )}
           {isConfirming && (
             <div className="flex items-center gap-2 text-blue-400">
               <div className="h-4 w-4 animate-pulse rounded-full bg-blue-400"></div>
-              <span>Waiting for confirmation...</span>
+              <span>{t('staking.waitingForConfirmation')}</span>
             </div>
           )}
           {isConfirmed && (
             <div className="text-green-400">
-              ✅ Transaction confirmed!
+              {t('staking.transactionConfirmed')}
               {hash && (
                 <a
                   href={`https://amoy.polygonscan.com/tx/${hash}`}
@@ -314,7 +326,9 @@ export function StakingInterface() {
             </div>
           )}
           {error && (
-            <div className="text-red-400">❌ Error: {error.message}</div>
+            <div className="text-red-400">
+              {t('staking.transactionError')} {error.message}
+            </div>
           )}
         </div>
       )}
