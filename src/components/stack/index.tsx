@@ -1,7 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { toast } from 'sonner'
 import { useAccount } from 'wagmi'
+import { startTransition, useState } from 'react'
 import { Coins, TrendingUp, Gift, AlertTriangle } from 'lucide-react'
 import { formatTokenAmount, useNECTRContract } from '~/hooks/use-nectr-contract'
 
@@ -23,39 +24,66 @@ export function StakingInterface() {
 
   const [stakeAmount, setStakeAmount] = useState('')
   const [unstakeAmount, setUnstakeAmount] = useState('')
+  const [transactionType, setTransactionType] = useState('')
 
   const { data: balance } = useBalance(address)
   const { data: stakedBalance } = useStakedBalance(address)
   const { data: pendingRewards } = usePendingRewards(address)
 
   const handleStake = async () => {
-    if (!stakeAmount || parseFloat(stakeAmount) <= 0) return
-
-    try {
+    setTransactionType('stake')
+    startTransition(async () => {
+      if (!stakeAmount || parseFloat(stakeAmount) <= 0) return
+      toast.info('Staking tokens...')
       await stakeTokens(stakeAmount)
-      setStakeAmount('')
-    } catch (err) {
-      console.error('Staking failed:', err)
-    }
+        .then(() => {
+          if (!isPending || !isConfirming) {
+            toast.success('Tokens staked successfully!')
+            setStakeAmount('')
+          }
+        })
+        .catch((err) => {
+          toast.error(`Staking failed: ${err?.message || 'Unknown error'}`)
+          console.error('Staking failed:', err)
+        })
+    })
   }
 
   const handleUnstake = async () => {
-    if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) return
-
-    try {
+    setTransactionType('unstake')
+    startTransition(async () => {
+      if (!unstakeAmount || parseFloat(unstakeAmount) <= 0) return
+      toast.info('Unstaking tokens...')
       await unstakeTokens(unstakeAmount)
-      setUnstakeAmount('')
-    } catch (err) {
-      console.error('Unstaking failed:', err)
-    }
+        .then(() => {
+          if (!isPending || (!isConfirming && transactionType === 'unstake')) {
+            toast.success('Tokens unstaked successfully!')
+          }
+        })
+        .catch((err) => {
+          toast.error(`Unstaking failed: ${err?.message || 'Unknown error'}`)
+          console.error('Unstaking failed:', err)
+        })
+    })
   }
 
   const handleClaimRewards = async () => {
-    try {
+    setTransactionType('claim')
+    startTransition(async () => {
+      toast.info('Claiming rewards...')
       await claimRewards()
-    } catch (err) {
-      console.error('Claiming rewards failed:', err)
-    }
+        .then(() => {
+          if (!isPending || (!isConfirming && transactionType === 'claim')) {
+            toast.success('Rewards claimed successfully!')
+          }
+        })
+        .catch((err) => {
+          toast.error(
+            `Claiming rewards failed: ${err?.message || 'Unknown error'}`
+          )
+          console.error('Claiming rewards failed:', err)
+        })
+    })
   }
 
   const setMaxStake = () => {
@@ -101,6 +129,12 @@ export function StakingInterface() {
 
   const unstakeError =
     unstakeAmountNum > availableStaked ? 'Insufficient staked balance' : null
+
+  const getStakeButtonText = () => {
+    if (isPending || (isConfirming && transactionType === 'stake'))
+      return 'Processing...'
+    return 'Stake'
+  }
 
   return (
     <div className="bg-card border border-dashed p-6 backdrop-blur-md">
@@ -149,7 +183,7 @@ export function StakingInterface() {
               disabled={isStakeDisabled || !!stakeError}
               className="bg-gradient-to-r from-purple-600 to-blue-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-purple-700 hover:to-blue-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
             >
-              {isPending || isConfirming ? 'Staking...' : 'Stake'}
+              {getStakeButtonText()}
             </button>
           </div>
 
@@ -205,7 +239,9 @@ export function StakingInterface() {
               disabled={isUnstakeDisabled || !!unstakeError}
               className="bg-gradient-to-r from-red-600 to-pink-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-red-700 hover:to-pink-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
             >
-              {isPending || isConfirming ? 'Unstaking...' : 'Unstake'}
+              {isPending || (isConfirming && transactionType === 'unstake')
+                ? 'Unstaking...'
+                : 'Unstake'}
             </button>
           </div>
 
@@ -240,7 +276,9 @@ export function StakingInterface() {
             disabled={isClaimDisabled}
             className="bg-gradient-to-r from-yellow-600 to-orange-600 px-6 py-3 font-medium text-white transition-all duration-200 hover:from-yellow-700 hover:to-orange-700 disabled:cursor-not-allowed disabled:from-gray-600 disabled:to-gray-700"
           >
-            {isPending || isConfirming ? 'Claiming...' : 'Claim Rewards'}
+            {isPending || (isConfirming && transactionType === 'claim')
+              ? 'Claiming...'
+              : 'Claim Rewards'}
           </button>
         </div>
       </div>
