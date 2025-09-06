@@ -201,21 +201,3 @@ export const formatStakingInfo = (stakingInfo: readonly [bigint, bigint, bigint]
     stakingDuration: formatDuration(BigInt(Math.floor(Date.now() / 1000)) - stakingSince)
   }
 }
-
-export const checkAllowanceAndStake = async (
-  amount: string,
-  currentAllowance: bigint,
-  approveTokens: (amount: string) => Promise<any>,
-  stakeTokens: (amount: string) => Promise<any>
-) => {
-  const amountBigInt = parseEther(amount)
-  
-  if (currentAllowance < amountBigInt) {
-    // Need to approve first
-    await approveTokens(amount)
-    // Note: In a real UI, you should wait for approval confirmation before staking
-    throw new Error('Approval required. Please approve tokens first, then stake.')
-  }
-  
-  return await stakeTokens(amount)
-}

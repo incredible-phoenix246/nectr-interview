@@ -37,7 +37,7 @@ export function StakingInterface() {
       toast.info('Staking tokens...')
       await stakeTokens(stakeAmount)
         .then(() => {
-          if (!isPending || !isConfirming) {
+          if (!isPending && !isConfirming) {
             toast.success('Tokens staked successfully!')
             setStakeAmount('')
           }
