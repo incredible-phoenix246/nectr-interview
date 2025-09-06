@@ -3,7 +3,7 @@ import {
   useWriteContract,
   useWaitForTransactionReceipt,
 } from 'wagmi'
-import { nectrContract } from '~/utils/web3/contracts'
+import { nectrContract, NECTR_CONTRACT_ADDRESS } from '~/utils/web3/contracts'
 import { parseEther, formatEther, type Address } from 'viem'
 
 export function useNECTRContract() {
@@ -88,6 +88,17 @@ export function useNECTRContract() {
     })
   }
 
+  const useAllowance = (address?: Address) => {
+    return useReadContract({
+      ...nectrContract,
+      functionName: 'allowance',
+      args: address ? [address, NECTR_CONTRACT_ADDRESS] : undefined,
+      query: {
+        enabled: !!address,
+      },
+    })
+  }
+
   const stakeTokens = async (amount: string) => {
     return writeContract({
       ...nectrContract,
@@ -127,6 +138,14 @@ export function useNECTRContract() {
     })
   }
 
+  const approveTokens = async (amount: string) => {
+    return writeContract({
+      ...nectrContract,
+      functionName: 'approve',
+      args: [NECTR_CONTRACT_ADDRESS, parseEther(amount)],
+    })
+  }
+
   return {
     useBalance,
     useStakedBalance,
@@ -135,12 +154,14 @@ export function useNECTRContract() {
     useStakingInfo,
     useStakingDuration,
     useHasStakedTokens,
+    useAllowance,
 
     stakeTokens,
     unstakeTokens,
     claimRewards,
     setStakingRewardRate,
     setMinimumStakeAmount,
+    approveTokens,
 
     isPending,
     isConfirming,
@@ -179,4 +200,22 @@ export const formatStakingInfo = (stakingInfo: readonly [bigint, bigint, bigint]
     stakingSince: new Date(Number(stakingSince) * 1000),
     stakingDuration: formatDuration(BigInt(Math.floor(Date.now() / 1000)) - stakingSince)
   }
+}
+
+export const checkAllowanceAndStake = async (
+  amount: string,
+  currentAllowance: bigint,
+  approveTokens: (amount: string) => Promise<any>,
+  stakeTokens: (amount: string) => Promise<any>
+) => {
+  const amountBigInt = parseEther(amount)
+  
+  if (currentAllowance < amountBigInt) {
+    // Need to approve first
+    await approveTokens(amount)
+    // Note: In a real UI, you should wait for approval confirmation before staking
+    throw new Error('Approval required. Please approve tokens first, then stake.')
+  }
+  
+  return await stakeTokens(amount)
 }
