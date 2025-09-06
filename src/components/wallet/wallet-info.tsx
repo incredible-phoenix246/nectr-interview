@@ -88,7 +88,9 @@ export function WalletInfo() {
       </div>
 
       <div className="mb-6">
-        <label className="mb-2 block text-sm font-medium">{t('wallet.walletAddress')}</label>
+        <label className="mb-2 block text-sm font-medium">
+          {t('wallet.walletAddress')}
+        </label>
         <div className="bg-background flex items-center gap-2 rounded p-3">
           <span className="flex-1 truncate font-mono text-sm text-white">
             {typeof address === 'string' ? address : ''}
@@ -127,7 +129,8 @@ export function WalletInfo() {
           </div>
           {formattedStakingInfo?.stakingSince && (
             <p className="mt-1 text-xs text-blue-300">
-              {t('staking.since')} {formattedStakingInfo.stakingSince.toLocaleDateString()}
+              {t('staking.since')}{' '}
+              {formattedStakingInfo.stakingSince.toLocaleDateString()}
             </p>
           )}
         </div>
@@ -151,7 +154,9 @@ export function WalletInfo() {
 
         {/* Staked Balance */}
         <div className="border border-green-500/30 bg-gradient-to-br from-green-600/20 to-green-800/20 p-4">
-          <h3 className="mb-1 text-sm font-medium text-green-200">{t('staking.staked')}</h3>
+          <h3 className="mb-1 text-sm font-medium text-green-200">
+            {t('staking.staked')}
+          </h3>
           <p className="text-2xl font-bold text-white">
             {stakedLoading ? (
               <span className="animate-pulse">t('staking.loading')</span>
@@ -214,7 +219,9 @@ export function WalletInfo() {
               </span>
             </div>
             <div className="flex justify-between">
-              <span className="text-gray-400">{t('staking.estimatedDailyRewards')}</span>
+              <span className="text-gray-400">
+                {t('staking.estimatedDailyRewards')}
+              </span>
               <span className="text-white">
                 {typeof stakedBalance === 'bigint'
                   ? `${formatTokenAmount((stakedBalance * BigInt(500)) / BigInt(10000) / BigInt(365), 6)} NECTR`

@@ -43,7 +43,9 @@ export function SocialFeed() {
             <Twitter className="h-6 w-6 text-blue-400" />
             <div>
               <h3 className="font-medium text-white">{t('social.twitter')}</h3>
-              <p className="text-sm text-blue-300">{t('social.followUpdates')}</p>
+              <p className="text-sm text-blue-300">
+                {t('social.followUpdates')}
+              </p>
             </div>
             <ExternalLink className="h-4 w-4 text-blue-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </div>

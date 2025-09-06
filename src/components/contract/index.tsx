@@ -45,25 +45,32 @@ export function ContractStats() {
         <div className="border border-blue-500/30 bg-gradient-to-br from-blue-600/20 to-blue-800/20 p-4">
           <div className="mb-2 flex items-center gap-2">
             <Users className="h-5 w-5 text-blue-400" />
-            <h3 className="text-sm font-medium text-blue-200">{t('stats.totalSupply')}</h3>
+            <h3 className="text-sm font-medium text-blue-200">
+              {t('stats.totalSupply')}
+            </h3>
           </div>
           <p className="text-2xl font-bold text-white">
             {totalSupply ? formatTokenAmount(totalSupply, 0) : '0'} NECTR
           </p>
-          <p className="mt-1 text-xs text-blue-200">{t('stats.maximumTokenSupply')}</p>
+          <p className="mt-1 text-xs text-blue-200">
+            {t('stats.maximumTokenSupply')}
+          </p>
         </div>
 
         {/* Total Staked */}
         <div className="border border-green-500/30 bg-gradient-to-br from-green-600/20 to-green-800/20 p-4">
           <div className="mb-2 flex items-center gap-2">
             <Shield className="h-5 w-5 text-green-400" />
-            <h3 className="text-sm font-medium text-green-200">{t('stats.totalStaked')}</h3>
+            <h3 className="text-sm font-medium text-green-200">
+              {t('stats.totalStaked')}
+            </h3>
           </div>
           <p className="text-2xl font-bold text-white">
             {totalStaked ? formatTokenAmount(totalStaked, 0) : '0'} NECTR
           </p>
           <p className="mt-1 text-xs text-green-200">
-            {stakingPercentage.toFixed(1)}{t('stats.percentageOfSupplyStaked')}
+            {stakingPercentage.toFixed(1)}
+            {t('stats.percentageOfSupplyStaked')}
           </p>
         </div>
 
@@ -71,7 +78,9 @@ export function ContractStats() {
         <div className="border border-purple-500/30 bg-gradient-to-br from-purple-600/20 to-purple-800/20 p-4">
           <div className="mb-2 flex items-center gap-2">
             <Percent className="h-5 w-5 text-purple-400" />
-            <h3 className="text-sm font-medium text-purple-200">{t('stats.stakingAPY')}</h3>
+            <h3 className="text-sm font-medium text-purple-200">
+              {t('stats.stakingAPY')}
+            </h3>
           </div>
           <p className="text-2xl font-bold text-white">
             {stakingRewardRate ? Number(stakingRewardRate) / 100 : 0}%

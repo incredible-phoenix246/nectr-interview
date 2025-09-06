@@ -97,10 +97,14 @@ export function NewsModule() {
 
   const getCategoryDisplayName = (category: string) => {
     switch (category) {
-      case 'all': return t('news.all')
-      case 'Blockchain': return t('news.blockchain')
-      case 'Bee News': return t('news.beeNews')
-      default: return category
+      case 'all':
+        return t('news.all')
+      case 'Blockchain':
+        return t('news.blockchain')
+      case 'Bee News':
+        return t('news.beeNews')
+      default:
+        return category
     }
   }
 

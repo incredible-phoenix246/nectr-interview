@@ -189,7 +189,9 @@ export const formatDuration = (seconds: bigint | undefined) => {
   return `${minutes}m`
 }
 
-export const formatStakingInfo = (stakingInfo: readonly [bigint, bigint, bigint] | undefined) => {
+export const formatStakingInfo = (
+  stakingInfo: readonly [bigint, bigint, bigint] | undefined
+) => {
   if (!stakingInfo) return null
 
   const [stakedAmount, pendingRewards, stakingSince] = stakingInfo
@@ -198,6 +200,8 @@ export const formatStakingInfo = (stakingInfo: readonly [bigint, bigint, bigint]
     stakedAmount: formatTokenAmount(stakedAmount),
     pendingRewards: formatTokenAmount(pendingRewards),
     stakingSince: new Date(Number(stakingSince) * 1000),
-    stakingDuration: formatDuration(BigInt(Math.floor(Date.now() / 1000)) - stakingSince)
+    stakingDuration: formatDuration(
+      BigInt(Math.floor(Date.now() / 1000)) - stakingSince
+    ),
   }
 }
