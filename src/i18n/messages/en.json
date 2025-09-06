@@ -1,0 +1,102 @@
+{
+  "app": {
+    "title": "NECTR dApp"
+  },
+  "wallet": {
+    "connect": "Connect Wallet",
+    "connecting": "Connecting...",
+    "disconnect": "Disconnect wallet",
+    "connectPrompt": "Connect Your Wallet",
+    "connectDescription": "Connect your wallet to view your NECTR portfolio",
+    "walletAddress": "Wallet Address",
+    "addressCopied": "Address copied to clipboard!",
+    "viewOnPolygonScan": "View on PolygonScan"
+  },
+  "staking": {
+    "stakingFor": "Staking for:",
+    "since": "Since:",
+    "nectrBalance": "NECTR Balance",
+    "staked": "Staked",
+    "pendingRewards": "Pending Rewards",
+    "loading": "Loading...",
+    "activeStakingPosition": "Active staking position",
+    "accumulatingRewards": "Accumulating at 5% APY",
+    "totalPortfolioValue": "Total Portfolio Value",
+    "stakingRatio": "Staking Ratio:",
+    "estimatedDailyRewards": "Est. Daily Rewards:",
+    "interface": "Staking Interface",
+    "stakeTokens": "Stake NECTR Tokens",
+    "amountToStake": "Amount to Stake",
+    "available": "Available:",
+    "max": "MAX",
+    "stake": "Stake",
+    "processing": "Processing...",
+    "minimumStake": "Minimum stake: 10 NECTR • Current APY: 5%",
+    "unstakeTokens": "Unstake Tokens",
+    "amountToUnstake": "Amount to Unstake",
+    "unstake": "Unstake",
+    "unstaking": "Unstaking...",
+    "rewards": "Pending Rewards",
+    "rewardsAccumulate": "Rewards accumulate every second",
+    "claimRewards": "Claim Rewards",
+    "claiming": "Claiming...",
+    "transactionPending": "Transaction pending...",
+    "waitingForConfirmation": "Waiting for confirmation...",
+    "transactionConfirmed": "✅ Transaction confirmed!",
+    "transactionError": "❌ Error:",
+    "errors": {
+      "insufficientBalance": "Insufficient balance",
+      "minimumStakeRequired": "Minimum stake is 10 NECTR",
+      "insufficientStakedBalance": "Insufficient staked balance"
+    },
+    "toasts": {
+      "stakingTokens": "Staking tokens...",
+      "tokensStakedSuccessfully": "Tokens staked successfully!",
+      "stakingFailed": "Staking failed:",
+      "unstakingTokens": "Unstaking tokens...",
+      "tokensUnstakedSuccessfully": "Tokens unstaked successfully!",
+      "unstakingFailed": "Unstaking failed:",
+      "claimingRewards": "Claiming rewards...",
+      "rewardsClaimedSuccessfully": "Rewards claimed successfully!",
+      "claimingRewardsFailed": "Claiming rewards failed:"
+    }
+  },
+  "stats": {
+    "contractStatistics": "Contract Statistics",
+    "totalSupply": "Total Supply",
+    "maximumTokenSupply": "Maximum token supply",
+    "totalStaked": "Total Staked",
+    "percentageOfSupplyStaked": "% of supply staked",
+    "stakingAPY": "Staking APY",
+    "annualPercentageYield": "Annual percentage yield",
+    "minimumStake": "Minimum Stake",
+    "requiredMinimumAmount": "Required minimum amount",
+    "contractAddress": "Contract Address:",
+    "network": "Network:",
+    "polygonAmoy": "Polygon Amoy",
+    "stakingProgress": "Staking Progress",
+    "tokensStaked": "tokens staked",
+    "loadingStakingData": "Loading staking data..."
+  },
+  "news": {
+    "latestNews": "Latest News",
+    "all": "All",
+    "blockchain": "Blockchain",
+    "beeNews": "Bee News",
+    "yesterday": "Yesterday",
+    "daysAgo": "days ago",
+    "articleNotAvailable": "This article page is not available yet 🚫",
+    "stayUpdated": "Stay updated with the latest NECTR ecosystem and blockchain news"
+  },
+  "social": {
+    "communityHub": "Community Hub",
+    "twitter": "Twitter",
+    "followUpdates": "Follow updates",
+    "telegram": "Telegram",
+    "joinChat": "Join chat",
+    "discord": "Discord",
+    "community": "Community",
+    "latestUpdates": "Latest Updates",
+    "loadingTwitterFeed": "Loading Twitter feed..."
+  }
+}

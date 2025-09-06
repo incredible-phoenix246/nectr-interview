@@ -8,12 +8,14 @@ import { NewsModule } from '~/components/news-module'
 import { SocialFeed } from '~/components/social-feed'
 import { Button } from '~/components/ui/button'
 import { useAppKit, useAppKitState } from '@reown/appkit/react'
+import { useTranslations } from 'next-intl'
 // import { ThemeSwitch } from '~/components/global/theme-switch'
 
 export default function Dashboard() {
   const { isConnected } = useAccount()
   const { open } = useAppKit()
   const { loading } = useAppKitState()
+  const t = useTranslations()
 
   return (
     <div className="container mx-auto min-h-screen p-8 max-md:p-2">
@@ -22,7 +24,7 @@ export default function Dashboard() {
       </div> */}
       <div className="space-y-6">
         <h1 className="mb-8 text-center text-4xl font-bold text-white">
-          NECTR dApp
+          {t('app.title')}
         </h1>
         {isConnected ? (
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
@@ -36,7 +38,7 @@ export default function Dashboard() {
         ) : (
           <div className="rounded-xl border border-white/20 bg-white/10 p-6 text-center text-white backdrop-blur-md">
             <Button onClick={() => open()}>
-              {loading ? 'Connecting...' : 'Connect Wallet'}
+              {loading ? t('wallet.connecting') : t('wallet.connect')}
             </Button>
           </div>
         )}

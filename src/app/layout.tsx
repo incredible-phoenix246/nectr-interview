@@ -4,6 +4,8 @@ import { headers } from 'next/headers'
 import { Providers } from './provider'
 import { Outfit } from 'next/font/google'
 import { cn } from '~/lib/utils'
+import { getLocale, getMessages } from 'next-intl/server'
+import { NextIntlClientProvider } from 'next-intl'
 
 const outfit = Outfit({
   variable: '--font-outfit',
@@ -22,10 +24,14 @@ export default async function RootLayout({
 }>) {
   const headersData = await headers()
   const cookies = headersData.get('cookie')
+  const locale = await getLocale()
+  const messages = await getMessages()
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <body className={cn('antialiased', outfit.variable)}>
-        <Providers cookies={cookies}>{children}</Providers>
+        <NextIntlClientProvider messages={messages}>
+          <Providers cookies={cookies}>{children}</Providers>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

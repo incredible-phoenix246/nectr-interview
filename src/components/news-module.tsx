@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { useTranslations } from 'next-intl'
 
 interface NewsArticle {
   id: string
@@ -81,6 +82,7 @@ const mockNews: NewsArticle[] = [
 
 export function NewsModule() {
   const [filter, setFilter] = useState<string>('all')
+  const t = useTranslations()
   const [articles] = useState<NewsArticle[]>(mockNews)
 
   const filteredArticles =
@@ -93,14 +95,27 @@ export function NewsModule() {
     ...Array.from(new Set(articles.map((a) => a.category))),
   ]
 
+  const getCategoryDisplayName = (category: string) => {
+    switch (category) {
+      case 'all':
+        return t('news.all')
+      case 'Blockchain':
+        return t('news.blockchain')
+      case 'Bee News':
+        return t('news.beeNews')
+      default:
+        return category
+    }
+  }
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString)
     const now = new Date()
     const diffTime = Math.abs(now.getTime() - date.getTime())
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
-    if (diffDays === 1) return 'Yesterday'
-    if (diffDays < 7) return `${diffDays} days ago`
+    if (diffDays === 1) return t('news.yesterday')
+    if (diffDays < 7) return `${diffDays} ${t('news.daysAgo')}`
     return date.toLocaleDateString()
   }
 
@@ -117,7 +132,7 @@ export function NewsModule() {
 
   const handleArticleClick = (url: string) => {
     if (!url || url === '#') {
-      toast.error('This article page is not available yet 🚫')
+      toast.error(t('news.articleNotAvailable'))
       return
     }
     window.open(url, '_blank')
@@ -128,7 +143,7 @@ export function NewsModule() {
       <div className="mb-6 flex items-center justify-between">
         <h2 className="flex items-center gap-2 text-2xl font-semibold text-white">
           <Newspaper className="h-6 w-6" />
-          Latest News
+          {t('news.latestNews')}
         </h2>
         <TrendingUp className="h-5 w-5 text-gray-400" />
       </div>
@@ -146,7 +161,7 @@ export function NewsModule() {
             }`}
           >
             <Filter className="h-3 w-3" />
-            {category.charAt(0).toUpperCase() + category.slice(1)}
+            {getCategoryDisplayName(category)}
           </button>
         ))}
       </div>
@@ -191,7 +206,7 @@ export function NewsModule() {
                             : 'bg-gray-600/30 text-gray-200'
                       }`}
                     >
-                      {article.category}
+                      {getCategoryDisplayName(article.category)}
                     </span>
                     <span className="text-gray-400">{article.source}</span>
                   </div>
@@ -212,7 +227,7 @@ export function NewsModule() {
       {/* Footer */}
       <div className="mt-4 border-t border-white/10 pt-4">
         <p className="text-center text-xs text-gray-400">
-          Stay updated with the latest NECTR ecosystem and blockchain news
+          {t('news.stayUpdated')}
         </p>
       </div>
     </div>

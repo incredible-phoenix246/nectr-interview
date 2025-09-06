@@ -1,0 +1,102 @@
+{
+  "app": {
+    "title": "NECTR dApp"
+  },
+  "wallet": {
+    "connect": "Wallet verbinden",
+    "connecting": "Verbindet...",
+    "disconnect": "Wallet trennen",
+    "connectPrompt": "Verbinden Sie Ihr Wallet",
+    "connectDescription": "Verbinden Sie Ihr Wallet, um Ihr NECTR-Portfolio anzuzeigen",
+    "walletAddress": "Wallet-Adresse",
+    "addressCopied": "Adresse in Zwischenablage kopiert!",
+    "viewOnPolygonScan": "Auf PolygonScan anzeigen"
+  },
+  "staking": {
+    "stakingFor": "Staking seit:",
+    "since": "Seit:",
+    "nectrBalance": "NECTR Guthaben",
+    "staked": "Gestaked",
+    "pendingRewards": "Ausstehende Belohnungen",
+    "loading": "Lädt...",
+    "activeStakingPosition": "Aktive Staking-Position",
+    "accumulatingRewards": "Sammelt mit 5% APY an",
+    "totalPortfolioValue": "Gesamt-Portfolio-Wert",
+    "stakingRatio": "Staking-Verhältnis:",
+    "estimatedDailyRewards": "Geschätzte tägliche Belohnungen:",
+    "interface": "Staking-Interface",
+    "stakeTokens": "NECTR Token staken",
+    "amountToStake": "Zu stakender Betrag",
+    "available": "Verfügbar:",
+    "max": "MAX",
+    "stake": "Staken",
+    "processing": "Verarbeitet...",
+    "minimumStake": "Mindestens staken: 10 NECTR • Aktueller APY: 5%",
+    "unstakeTokens": "Token entstaken",
+    "amountToUnstake": "Zu entstakender Betrag",
+    "unstake": "Entstaken",
+    "unstaking": "Entstakt...",
+    "rewards": "Ausstehende Belohnungen",
+    "rewardsAccumulate": "Belohnungen sammeln sich jede Sekunde an",
+    "claimRewards": "Belohnungen einfordern",
+    "claiming": "Fordert ein...",
+    "transactionPending": "Transaktion ausstehend...",
+    "waitingForConfirmation": "Warte auf Bestätigung...",
+    "transactionConfirmed": "✅ Transaktion bestätigt!",
+    "transactionError": "❌ Fehler:",
+    "errors": {
+      "insufficientBalance": "Unzureichendes Guthaben",
+      "minimumStakeRequired": "Mindestens 10 NECTR staken",
+      "insufficientStakedBalance": "Unzureichendes gestaktes Guthaben"
+    },
+    "toasts": {
+      "stakingTokens": "Token werden gestaked...",
+      "tokensStakedSuccessfully": "Token erfolgreich gestaked!",
+      "stakingFailed": "Staking fehlgeschlagen:",
+      "unstakingTokens": "Token werden entstaked...",
+      "tokensUnstakedSuccessfully": "Token erfolgreich entstaked!",
+      "unstakingFailed": "Entstaking fehlgeschlagen:",
+      "claimingRewards": "Belohnungen werden eingefordert...",
+      "rewardsClaimedSuccessfully": "Belohnungen erfolgreich eingefordert!",
+      "claimingRewardsFailed": "Einfordern von Belohnungen fehlgeschlagen:"
+    }
+  },
+  "stats": {
+    "contractStatistics": "Vertrags-Statistiken",
+    "totalSupply": "Gesamtvorrat",
+    "maximumTokenSupply": "Maximaler Token-Vorrat",
+    "totalStaked": "Gesamt gestaked",
+    "percentageOfSupplyStaked": "% des Vorrats gestaked",
+    "stakingAPY": "Staking APY",
+    "annualPercentageYield": "Jährliche prozentuale Rendite",
+    "minimumStake": "Mindest-Stake",
+    "requiredMinimumAmount": "Erforderlicher Mindestbetrag",
+    "contractAddress": "Vertragsadresse:",
+    "network": "Netzwerk:",
+    "polygonAmoy": "Polygon Amoy",
+    "stakingProgress": "Staking-Fortschritt",
+    "tokensStaked": "Token gestaked",
+    "loadingStakingData": "Lade Staking-Daten..."
+  },
+  "news": {
+    "latestNews": "Neueste Nachrichten",
+    "all": "Alle",
+    "blockchain": "Blockchain",
+    "beeNews": "Bienen-Nachrichten",
+    "yesterday": "Gestern",
+    "daysAgo": "Tage her",
+    "articleNotAvailable": "Dieser Artikel ist noch nicht verfügbar 🚫",
+    "stayUpdated": "Bleiben Sie auf dem Laufenden mit den neuesten NECTR-Ökosystem- und Blockchain-Nachrichten"
+  },
+  "social": {
+    "communityHub": "Community-Hub",
+    "twitter": "Twitter",
+    "followUpdates": "Updates folgen",
+    "telegram": "Telegram",
+    "joinChat": "Chat beitreten",
+    "discord": "Discord",
+    "community": "Community",
+    "latestUpdates": "Neueste Updates",
+    "loadingTwitterFeed": "Lade Twitter-Feed..."
+  }
+}

@@ -4,9 +4,11 @@
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import { Twitter, MessageCircle, Users, ExternalLink } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 export function SocialFeed() {
   const [twitterLoaded, setTwitterLoaded] = useState(false)
+  const t = useTranslations()
 
   useEffect(() => {
     if (typeof window !== 'undefined' && (window as any).twttr?.widgets) {
@@ -26,7 +28,7 @@ export function SocialFeed() {
     <div className="bg-card border border-dashed p-6 backdrop-blur-md max-md:p-2">
       <h2 className="mb-6 flex items-center gap-2 text-2xl font-semibold text-white">
         <Users className="h-6 w-6" />
-        Community Hub
+        {t('social.communityHub')}
       </h2>
 
       <div className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -40,8 +42,10 @@ export function SocialFeed() {
           <div className="flex items-center gap-3">
             <Twitter className="h-6 w-6 text-blue-400" />
             <div>
-              <h3 className="font-medium text-white">Twitter</h3>
-              <p className="text-sm text-blue-300">Follow updates</p>
+              <h3 className="font-medium text-white">{t('social.twitter')}</h3>
+              <p className="text-sm text-blue-300">
+                {t('social.followUpdates')}
+              </p>
             </div>
             <ExternalLink className="h-4 w-4 text-blue-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </div>
@@ -57,8 +61,8 @@ export function SocialFeed() {
           <div className="flex items-center gap-3">
             <MessageCircle className="h-6 w-6 text-cyan-400" />
             <div>
-              <h3 className="font-medium text-white">Telegram</h3>
-              <p className="text-sm text-cyan-300">Join chat</p>
+              <h3 className="font-medium text-white">{t('social.telegram')}</h3>
+              <p className="text-sm text-cyan-300">{t('social.joinChat')}</p>
             </div>
             <ExternalLink className="h-4 w-4 text-cyan-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </div>
@@ -74,8 +78,8 @@ export function SocialFeed() {
           <div className="flex items-center gap-3">
             <Users className="h-6 w-6 text-indigo-400" />
             <div>
-              <h3 className="font-medium text-white">Discord</h3>
-              <p className="text-sm text-indigo-300">Community</p>
+              <h3 className="font-medium text-white">{t('social.discord')}</h3>
+              <p className="text-sm text-indigo-300">{t('social.community')}</p>
             </div>
             <ExternalLink className="h-4 w-4 text-indigo-400 opacity-0 transition-opacity group-hover:opacity-100" />
           </div>
@@ -86,7 +90,7 @@ export function SocialFeed() {
       <div className="bg-black/20 p-4">
         <h3 className="mb-4 flex items-center gap-2 text-lg font-medium text-white">
           <Twitter className="h-5 w-5 text-blue-400" />
-          Latest Updates
+          {t('social.latestUpdates')}
         </h3>
 
         <div className="twitter-embed-container">
@@ -94,7 +98,7 @@ export function SocialFeed() {
             <div className="flex h-64 items-center justify-center text-gray-400">
               <div className="text-center">
                 <div className="mx-auto mb-2 h-8 w-8 animate-spin rounded-full border-2 border-blue-400 border-t-transparent" />
-                <p>Loading Twitter feed...</p>
+                <p>{t('social.loadingTwitterFeed')}</p>
               </div>
             </div>
           )}

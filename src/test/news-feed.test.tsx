@@ -3,6 +3,23 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { NewsModule } from '~/components/news-module'
 import { toast } from 'sonner'
 
+// Mock next-intl first, before any imports
+vi.mock('next-intl', () => ({
+  useTranslations: vi.fn(() => (key: string) => {
+    const translations: Record<string, string> = {
+      'news.latestNews': 'Latest News',
+      'news.all': 'All',
+      'news.blockchain': 'Blockchain',
+      'news.beeNews': 'Bee News',
+      'news.yesterday': 'Yesterday',
+      'news.daysAgo': 'days ago',
+      'news.articleNotAvailable': 'This article page is not available yet 🚫',
+      'news.stayUpdated': 'Stay updated with the latest NECTR ecosystem and blockchain news'
+    }
+    return translations[key] || key
+  }),
+}))
+
 vi.mock('sonner', () => ({
   toast: {
     error: vi.fn(),
